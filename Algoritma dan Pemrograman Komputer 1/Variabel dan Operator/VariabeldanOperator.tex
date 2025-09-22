@@ -1,0 +1,402 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\usetheme{metropolis}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    columns=flexible
+}
+
+% Info presentasi
+\title{Pengantar Algoritma dan Pemrograman}
+\subtitle{Bab 3: Variabel dan Operator}
+\author{Nama Anda \\ NRP Anda}
+\institute{Departemen Matematika \\ Fakultas Sains dan Analitika Data \\ Institut Teknologi Sepuluh Nopember}
+
+% Logo untuk title page
+\titlegraphic{%
+  \includegraphics[height=0.9cm]{../assets/logoprovikom.jpg}%
+  \hspace{0.5em}%
+  \includegraphics[height=0.9cm]{../assets/logomatematika.png}%
+  \hspace{0.5em}%
+  \includegraphics[height=1cm]{../assets/logoits.png}%
+}
+
+\begin{document}
+
+% Cover
+\maketitle
+
+% Daftar Isi
+\begin{frame}{Daftar Isi}
+  \tableofcontents
+\end{frame}
+
+% Section 1: Pengenalan Variabel
+\section{Pengenalan Variabel}
+\begin{frame}{Apa itu Variabel?}
+  \begin{block}{Definisi}
+    Variabel adalah satuan dasar penyimpanan dalam Java yang bersifat sementara.
+  \end{block}
+  \begin{itemize}
+    \item Menyimpan data yang dapat berubah selama program berjalan
+    \item Data dapat berupa bilangan, huruf, atau tipe data lainnya
+    \item Memiliki nama (identifier) dan tipe data
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Identifier (Penamaan Variabel)}
+  \begin{block}{Aturan Penamaan Identifier}
+    \begin{itemize}
+      \item Tidak boleh mengandung spasi
+      \item Harus diawali dengan: karakter Unicode, \textcolor{red}{\$} (dollar), atau \_ (underscore)
+      \item Case-sensitive (huruf besar dan kecil berbeda)
+      \item Tidak dibatasi panjang maksimum
+      \item Tidak boleh menggunakan kata kunci Java
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{Contoh yang Benar}
+    \texttt{nama, nilai1, nama\_saya, \_alamat, \textcolor{red}{\$harga}, \textcolor{red}{nama\$baru}}
+  \end{exampleblock}
+  \begin{alertblock}{Contoh yang Salah}
+    \texttt{1nilai, nama lengkap, class, \textcolor{red}{\$}}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Identifier (Penamaan Variabel)}
+    \begin{alertblock}{Perhatian!}
+    Meskipun diperbolehkan, penggunaan \textcolor{red}{\$} tidak disarankan karena:
+    \begin{itemize}
+      \item Compiler Java menggunakan \$ untuk nama class inner
+      \item Dapat membingungkan dan mengurangi readability
+      \item Konvensi pemrograman Java tidak menganjurkannya
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 2: Tipe Data Dasar
+\section{Tipe Data Dasar}
+\begin{frame}[fragile]{Tipe Data Dasar Java}
+  \begin{table}
+  \scriptsize
+  \begin{tabular}{|>{\columncolor{blue!10}}l|c|>{\raggedright\arraybackslash}p{3cm}|l|}
+  \hline
+  \rowcolor{blue!20}
+  \textbf{Tipe Data} & \textbf{Panjang Bit} & \textbf{Range} & \textbf{Default} \\
+  \hline
+  \cellcolor{green!10}boolean & 16 & true/false & false \\
+  \cellcolor{green!10}char & 16 & 0 to $2^{16}-1$ & \textbackslash u0000 \\
+  \cellcolor{green!10}byte & 8 & $-2^7$ to $2^7-1$ & 0 \\
+  \cellcolor{green!10}short & 16 & $-2^{15}$ to $2^{15}-1$ & 0 \\
+  \cellcolor{green!10}int & 32 & $-2^{31}$ to $2^{31}-1$ & 0 \\
+  \cellcolor{green!10}long & 64 & $-2^{63}$ to $2^{63}-1$ & 0L \\
+  \cellcolor{green!10}float & 32 & 3.4e-038 to 3.4e+038 & 0.0F \\
+  \cellcolor{green!10}double & 64 & 1.7e-308 to 1.7e+308 & 0.0 \\
+  \hline
+  \rowcolor{yellow!20}
+  \cellcolor{yellow!10}String & Variabel & Unicode characters & null \\
+  \hline
+  \end{tabular}
+  \end{table}
+  
+  \begin{block}{Keterangan}
+    \begin{itemize}
+      \item \textcolor{blue}{Tipe data primitif} (8 jenis pertama) disimpan langsung dalam memori
+      \item \textcolor{orange}{String} adalah tipe data referensi (bukan primitif)
+      \item String sebenarnya adalah class yang mewakili urutan karakter
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Contoh Penggunaan String}
+  \begin{exampleblock}{Deklarasi dan Inisialisasi String\\}
+\begin{lstlisting}
+// Menggunakan literal string
+String nama = "Budi Santoso";
+
+// Menggunakan constructor
+String alamat = new String("Jl. Merdeka No. 123");
+
+// Concatenation (penggabungan string)
+String salam = "Halo, " + nama + "!";
+
+// Method pada String
+int panjang = nama.length();
+String kapital = nama.toUpperCase();
+String kecil = nama.toLowerCase();
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Deklarasi dan Inisialisasi Variabel}
+  \begin{block}{Sintaks Dasar}
+    \texttt{tipeData namaVariabel = nilai;}
+  \end{block}
+  
+  \begin{exampleblock}{Contoh}
+\begin{lstlisting}
+int umur = 20;
+double harga = 15000.50;
+char grade = 'A';
+boolean isActive = true;
+String nama = "Budi";
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Operasi pada String}
+  \begin{exampleblock}{Beberapa Operasi String yang Umum\\}
+\begin{lstlisting}
+String str1 = "Hello";
+String str2 = "World";
+// Penggabungan string
+String result = str1 + " " + str2; // "Hello World"
+// Perbandingan string
+boolean isEqual = str1.equals(str2); // false
+// Substring
+String sub = result.substring(0, 5); // "Hello"
+// Pengecekan prefix/suffix
+boolean startsWithH = str1.startsWith("H"); // true
+boolean endsWithD = str2.endsWith("d"); // true
+// Mengganti karakter
+String replaced = str1.replace('l', 'p'); // "Heppo"
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 3: Operator
+\section{Operator dalam Java}
+\begin{frame}{Jenis-Jenis Operator}
+  \begin{itemize}
+    \item \textbf{Binary Operator}: 2 operand (contoh: \texttt{+, -, *, /})
+    \item \textbf{Unary Operator}: 1 operand (contoh: \texttt{++, --})
+    \item \textbf{Ternary Operator}: 3 operand (contoh: \texttt{? :})
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Operator Aritmatika}
+  \begin{table}
+  \scriptsize
+  \begin{tabular}{|>{\columncolor{blue!10}}l|l|>{\raggedright\arraybackslash}p{4cm}|}
+  \hline
+  \rowcolor{blue!20}
+  \textbf{Operator} & \textbf{Penggunaan} & \textbf{Deskripsi} \\
+  \hline
+  \cellcolor{green!10}+ & a + b & Penjumlahan \\
+  \cellcolor{green!10}- & a - b & Pengurangan \\
+  \cellcolor{green!10}* & a * b & Perkalian \\
+  \cellcolor{green!10}/ & a / b & Pembagian \\
+  \cellcolor{green!10}\% & a \% b & Modulus (sisa bagi) \\
+  \hline
+  \end{tabular}
+  \end{table}
+
+  \vspace{0.3cm}
+  \begin{exampleblock}{Contoh Kode}
+    \begin{lstlisting}
+int a = 15, b = 4;
+System.out.println("Penjumlahan: " + (a + b));      // 19
+System.out.println("Pembagian: " + (a / b));        // 3 (integer division)
+System.out.println("Modulus: " + (a % b));          // 3 (sisa bagi)
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Operator Increment dan Decrement}
+  \begin{table}
+  \scriptsize
+  \begin{tabular}{|l|l|l|}
+  \hline
+  \textbf{Operator} & \textbf{Penggunaan} & \textbf{Deskripsi} \\
+  \hline
+  ++ & a++ & Menambah nilai a setelah operasi \\
+  ++ & ++a & Menambah nilai a sebelum operasi \\
+  -- & a-- & Mengurangi nilai a setelah operasi \\
+  -- & --a & Mengurangi nilai a sebelum operasi \\
+  \hline
+  \end{tabular}
+  \end{table}
+  
+  \begin{exampleblock}{Contoh}
+\begin{lstlisting}
+int x = 5;
+System.out.println(x++); // Output: 5
+System.out.println(++x); // Output: 7
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Operator Relasional dan Logika}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Operator Relasional}
+        \scriptsize
+        \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Operator} & \textbf{Keterangan} \\
+        \hline
+        == & Sama dengan \\
+        != & Tidak sama dengan \\
+        > & Lebih dari \\
+        >= & Lebih dari sama dengan \\
+        < & Kurang dari \\
+        <= & Kurang dari sama dengan \\
+        \hline
+        \end{tabular}
+      \end{block}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Operator Logika}
+        \scriptsize
+        \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Operator} & \textbf{Keterangan} \\
+        \hline
+        \& & AND \\
+        | & OR \\
+        \^{} & XOR \\
+        ! & NOT \\
+        \&\& & AND (short circuit) \\
+        || & OR (short circuit) \\
+        \hline
+        \end{tabular}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Operator Kondisi (Ternary Operator)}
+  \begin{block}{Sintaks}
+    \texttt{kondisi ? nilaiJikaTrue : nilaiJikaFalse}
+  \end{block}
+  
+  \begin{exampleblock}{Contoh}
+\begin{lstlisting}
+int a = 8, b = 10;
+int kecil = a < b ? a : b;
+System.out.println("Nilai yang lebih kecil: " + kecil);
+\end{lstlisting}
+  \end{exampleblock}
+  
+  \begin{alertblock}{Output}
+    \texttt{Nilai yang lebih kecil: 8}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Operator Kombinasi}
+  \begin{block}{Operator Gabungan}
+    Menggabungkan operasi aritmatika dengan assignment
+  \end{block}
+  
+  \begin{exampleblock}{Contoh}
+\begin{lstlisting}
+int x = 10;
+x += 5;  // x = x + 5 → 15
+x -= 3;  // x = x - 3 → 12
+x *= 2;  // x = x * 2 → 24
+x /= 4;  // x = x / 4 → 6
+x %= 5;  // x = x % 5 → 1
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 4: Contoh Program
+\section{Contoh Program}
+\begin{frame}[fragile]{Contoh: Nilai Default Variabel}
+\begin{lstlisting}
+public class DefaultValue {
+    static boolean b;
+    static char c;
+    static byte bt;
+    static short s;
+    static int i;
+    static long l;
+    static float f;
+    static double d;
+    
+    public static void main(String args[]) {
+        System.out.println("Default value b = " + b);
+        System.out.println("Default value c = " + c);
+        System.out.println("Default value bt = " + bt);
+        // ... dan seterusnya
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Contoh: Operator Increment-Decrement}
+\begin{lstlisting}
+class IncDec {
+    public static void main (String args[]) {
+        int x = 8, y = 13;
+        System.out.println("x = " + x);
+        System.out.println("y = " + y);
+        System.out.println("x = " + ++x);  // Pre-increment
+        System.out.println("y = " + y++);  // Post-increment
+        System.out.println("x = " + x--);  // Post-decrement
+        System.out.println("y = " + --y);  // Pre-decrement
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+% Section 5: Latihan dan Tugas
+\section{Latihan}
+\begin{frame}{Latihan}
+  \begin{enumerate}
+    \item Buat program yang menghitung operasi aritmatika pada a = 100 dan b = 10
+    \item Buat program yang menentukan nilai logika dengan c = true dan d = false
+    \item Buat program yang menghitung luas dan volume tabung menggunakan Math.PI
+    \item Buat program yang menentukan apakah a merupakan modulus dari b menggunakan operator kondisi
+  \end{enumerate}
+\end{frame}
+
+% Section 6: Kesimpulan
+\section{Kesimpulan}
+\begin{frame}{Kesimpulan}
+  \begin{alertblock}{Inti Bab 3}
+    \begin{itemize}
+      \item Variabel adalah tempat penyimpanan data yang memiliki nama dan tipe data
+      \item Java memiliki 8 tipe data dasar dengan karakteristik yang berbeda
+      \item Operator digunakan untuk memanipulasi nilai dan variabel
+      \item Pemahaman variabel dan operator adalah dasar pemrograman Java
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Penutup
+\begin{frame}[standout]
+  \Huge \textbf{Terima Kasih} \\[1.5em]
+  \Large Pertanyaan dan Diskusi
+\end{frame}
+
+\end{document}
