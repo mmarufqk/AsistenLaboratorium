@@ -1,6 +1,7 @@
 # AsistenLaboratorium
 
 # 📘 Algorithms & Computer Programming 1
+# 📘 Algorithms & Computer Programming 1
 
 This repository contains **course materials for Algorithms & Computer Programming 1**.  
 All materials are written using **LaTeX Beamer** and can be compiled into presentation slides (PDF).  
