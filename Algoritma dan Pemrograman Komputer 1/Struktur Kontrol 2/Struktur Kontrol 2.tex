@@ -47,6 +47,7 @@
 \title{Algoritma dan Pemrograman Komputer 1}
 \subtitle{Bab 6: Struktur Kontrol 2}
 \author{Aslam Pandu Tasminto -- 5002241025 \\ M. Ma'ruf Qomaruddin Kafi -- 5002241095}
+\date{October 6, 2025} %
 \institute{Departemen Matematika \\ Fakultas Sains dan Analitika Data \\ Institut Teknologi Sepuluh Nopember}
 
 % Logo untuk title page
@@ -83,16 +84,6 @@
   \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Kapan Menggunakan SWITCH?}
-  \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{Struktur Kontrol 2/switch-vs-if-else.png}
-    \caption{Perbandingan penggunaan SWITCH vs IF-ELSE untuk multiple conditions}
-    \label{fig:switch-vs-if}
-  \end{figure}
-  \textbf{Sumber: }GeeksforGeeks - Switch Statements in Java
-\end{frame}
-
 % Section 2: Sintaks Dasar SWITCH
 \section{Sintaks Dasar SWITCH}
 \begin{frame}[fragile]{Sintaks Dasar Pernyataan SWITCH}
@@ -119,7 +110,7 @@ switch (ekspresi) {
 \begin{frame}{Komponen SWITCH Statement}
   \begin{table}
     \footnotesize
-    \begin{tabular}{p{0.3\textwidth}|p{0.6\textwidth}}
+    \begin{tabular}{p{0.25\textwidth}|p{0.65\textwidth}}
     \textbf{Komponen} & \textbf{Deskripsi} \\
     \hline
     \rowcolor{lightgray}
@@ -140,31 +131,45 @@ switch (ekspresi) {
 \begin{frame}[fragile]{Flowchart Pernyataan SWITCH}
   \begin{figure}[h]
     \centering
-    \includegraphics[width=0.65\textwidth]{Struktur Kontrol 2/switch-flowchart.png}
+    \includegraphics[width=0.45\linewidth]{Struktur Kontrol 2/switch-flowchart.png}
     \caption{Alur eksekusi pernyataan SWITCH dalam Java}
     \label{fig:switch-flowchart}
   \end{figure}
   \textbf{Sumber: }Programiz - Java switch Statement
 \end{frame}
-
 % Section 3: SWITCH dengan Tipe Data Berbeda
 \section{SWITCH dengan Tipe Data Berbeda}
 \begin{frame}[fragile]{SWITCH dengan Tipe Data CHAR}
   \begin{exampleblock}{Contoh Program: SWITCH dengan Char}
     \begin{lstlisting}
-import java.io.IOException;
+import java.util.Scanner;
+// import java.io.IOException;  // Untuk alternatif System.in.read()
 
 public class SwitchChar {
-    public static void main(String[] args) throws IOException {
-        System.out.println("Masukkan karakter nama anda");
-        char inisial = (char)System.in.read();
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Masukkan inisial nama anda:");
         
-        switch(inisial) {
+        // Mengambil karakter pertama dari input
+        char inisial = scanner.next().charAt(0);
+        // Bisa juga menggunakan: 
+        // char inisial = (char)System.in.read(); (dengan throws IOException)
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{SWITCH dengan Tipe Data CHAR}
+  \begin{exampleblock}{Contoh Program: SWITCH dengan Char}
+    \begin{lstlisting}
+        switch(Character.toLowerCase(inisial)) {
             case 'a': 
                 System.out.println("Nama anda pasti Angga");
                 break;
             case 'b': 
                 System.out.println("Nama anda pasti Budi");
+                break;
+            case 'c': 
+                System.out.println("Nama anda pasti Cici");
                 break;
             default: 
                 System.out.println("Nama anda tidak terkenal");
@@ -174,6 +179,24 @@ public class SwitchChar {
 }
     \end{lstlisting}
   \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Penjelasan Input Char}
+  \begin{block}{Cara Kerja \texttt{scanner.next().charAt(0)}}
+    \begin{itemize}
+      \item \texttt{scanner.next()} membaca input sebagai \textbf{String}
+      \item \texttt{.charAt(0)} mengambil \textbf{karakter pertama} dari string tersebut
+      \item Contoh: Input "Budi" → \texttt{charAt(0)} = 'B'
+    \end{itemize}
+  \end{block}
+  
+  \begin{alertblock}{Alternatif: \texttt{System.in.read()}}
+    \begin{itemize}
+      \item Membaca langsung 1 karakter dari input stream
+      \item Butuh \texttt{throws IOException} di method signature
+      \item Lebih "pure" untuk input karakter tunggal
+    \end{itemize}
+  \end{alertblock}
 \end{frame}
 
 \begin{frame}{Output SWITCH dengan CHAR}
@@ -199,7 +222,7 @@ public class SwitchChar {
 \begin{itemize}
 \item Gunakan single quote (\texttt{' '}) untuk karakter
 \item \texttt{System.in.read()} membutuhkan \texttt{throws IOException}
-\item Case-sensitive: 'A' berbeda dengan 'a'
+\item \texttt{Character.toLowerCase()} membuat program case-insensitive. 'A' dan 'a' akan diperlakukan sama
 \end{itemize}
 \end{block}
 \end{frame}
@@ -221,6 +244,14 @@ public class SwitchInt {
             case 6: bulanString = "Juni"; break;
             case 7: bulanString = "Juli"; break;
             case 8: bulanString = "Agustus"; break;
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]{SWITCH dengan Tipe Data INT}
+  \begin{exampleblock}{Contoh Program: Konversi Bulan}
+    \begin{lstlisting}
             case 9: bulanString = "September"; break;
             case 10: bulanString = "Oktober"; break;
             case 11: bulanString = "Nopember"; break;
@@ -268,6 +299,14 @@ public class SwitchString {
             case "kamis": 
             case "jumat": 
                 jenisHari = "Hari kerja"; break;
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]{SWITCH dengan Tipe Data STRING (JDK 7+)}
+  \begin{exampleblock}{Contoh Program: SWITCH dengan String}
+    \begin{lstlisting}
             case "sabtu": 
             case "minggu": 
                 jenisHari = "Hari libur"; break;
@@ -321,17 +360,7 @@ public class SwitchNoBreak {
 \item Dapat dimanfaatkan untuk multiple case dengan aksi sama
 \end{itemize}
 \end{block}
-\end{frame}
-
-\begin{frame}[fragile]{Visualisasi Fall Through Behavior}
-  \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Struktur Kontrol 2/switch-fall-through.png}
-    \caption{Ilustrasi fall through behavior dalam SWITCH statement}
-    \label{fig:switch-fall-through}
-  \end{figure}
-  \textbf{Sumber: }Baeldung - Java Switch Statement
-\end{frame}
+\end{frame} 
 
 % Section 5: Multiple Case
 \section{Multiple Case Statements}
@@ -352,6 +381,13 @@ public class SwitchMultipleCase {
             case 4: case 6: case 9: case 11:
                 jmlHari = 30;
                 break;
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple Case untuk Aksi yang Sama}
+  \begin{exampleblock}{Contoh Program: Jumlah Hari dalam Bulan}
+    \begin{lstlisting}
             case 2:
                 if (((tahun % 4 == 0) && !(tahun % 100 == 0)) 
                     || (tahun % 400 == 0))
@@ -370,6 +406,7 @@ public class SwitchMultipleCase {
   \end{exampleblock}
 \end{frame}
 
+
 \begin{frame}{Output Multiple Case}
 \begin{block}{Contoh Eksekusi Program}
 \colorbox{gray!20}{
@@ -379,7 +416,7 @@ public class SwitchMultipleCase {
 }
 \end{block}
 
-\begin{block}{Penjelasan Logic}
+\begin{block}{Penjelasan}
 \begin{itemize}
 \item Bulan 2 (Februari) dengan tahun 2000 (tahun kabisat)
 \item Tahun kabisat: habis dibagi 4, tapi tidak habis dibagi 100, atau habis dibagi 400
@@ -410,8 +447,14 @@ public class NestedSwitch {
         System.out.println("Pilih program:");
         System.out.println("1. Konversi Bulan");
         System.out.println("2. Cek Hari dalam Bulan");
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Konsep Nested SWITCH}
+  \begin{exampleblock}{Contoh Program: Menu Bertingkat}
+    \begin{lstlisting}
         System.out.print("Masukkan pilihan (1-2): ");
-        
         int pilihan = baca.nextInt();
         
         switch(pilihan) {
@@ -440,7 +483,6 @@ public class NestedSwitch {
       \item \textbf{Gunakan default case} untuk menangani nilai tak terduga
       \item \textbf{Group case yang sama} untuk menghindari duplikasi kode
       \item \textbf{Pertimbangkan readability} - jika terlalu kompleks, gunakan if-else
-      \item \textbf{Validasi input} sebelum masuk ke switch statement
     \end{itemize}
   \end{alertblock}
 
@@ -459,15 +501,15 @@ public class NestedSwitch {
     \textbf{SWITCH Statement} & \textbf{IF-ELSE IF Statement} \\
     \hline
     \rowcolor{lightgray}
-    Equality check dengan konstanta & Range check dan kondisi kompleks \\
+    Cocok untuk pengecekan nilai tetap & Cocok untuk pengecekan range \\
     \rowcolor{white}
-    Lebih rapi untuk banyak kondisi & Lebih fleksibel untuk logika kompleks \\
+    Lebih rapi untuk banyak pilihan & Lebih fleksibel untuk kondisi rumit \\
     \rowcolor{lightgray}
-    Potensi lebih efisien & Mudah untuk menambahkan kondisi baru \\
+    Lebih cepat untuk banyak case & Mudah ditambah kondisi baru \\
     \rowcolor{white}
-    Harus break secara eksplisit & Tidak perlu break statement \\
+    Perlu \texttt{break} untuk setiap case & Tidak perlu \texttt{break} \\
     \rowcolor{lightgray}
-    Terbatas pada tipe data tertentu & Mendukung semua tipe data boolean \\
+    Umumnya untuk: char, int, String & Untuk semua tipe data dan ekspresi \\
     \end{tabular}
     \caption{Perbandingan SWITCH vs IF-ELSE IF}
   \end{table}
@@ -476,7 +518,7 @@ public class NestedSwitch {
 % Section 8: Latihan
 \section{Latihan}
 \begin{frame}{Latihan 1: Kalkulator dengan Validasi}
-  \begin{block}{Soal 1: Kalkulator Cerdas}
+  \begin{block}{Soal 1: Kalkulator dengan Validasi}
     Buat program kalkulator menggunakan SWITCH yang:
     \begin{itemize}
       \item Meminta input 2 bilangan
@@ -496,44 +538,49 @@ public class NestedSwitch {
 
 \begin{frame}{Latihan 2: Sistem Klasifikasi Nilai}
   \begin{block}{Soal 2: Konversi dan Klasifikasi Nilai}
-    Buat program yang mengkombinasikan IF dan SWITCH untuk:
+  Buat program yang mengkombinasikan IF dan SWITCH untuk Konversi nilai ke huruf sesuai Peraturan Akademik ITS.
     \begin{itemize}
-      \item \textbf{Input}: nilai angka (0-100)
-      \item \textbf{Step 1}: Konversi ke nilai huruf menggunakan IF-ELSE IF:
-        \begin{itemize}
-          \item A: 86-100, AB: 76-85, B: 66-75, BC: 61-65, C: 56-60, D: 41-55, E: 0-40
-        \end{itemize}
-      \item \textbf{Step 2}: Konversi ke predikat menggunakan SWITCH:
-        \begin{itemize}
-          \item A = Luar Biasa, B/AB = Baik, BC/C = Cukup, D/E = Perlu Improvement
-        \end{itemize}
-      \item \textbf{Output}: 
-        \texttt{Nilai 85 → AB → Baik}
+        \item Nilai angka (86-100) : Nilai A / Istimewa \\
+        \item Nilai angka (76-85) : Nilai AB / Baik Sekali \\
+        \item Nilai angka (66-75) : Nilai B / Baik \\
+        \item Nilai angka (61-65) : Nilai BC / Cukup Baik \\
+        \item Nilai angka (56-60) : Nilai C / Cukup \\
+        \item Nilai angka (41-55) : Nilai D / Kurang \\
+        \item Nilai angka (0-40) : Nilai E / Kurang Sekali
     \end{itemize}
+
+    \textbf{Input}: Nilai angka (0-100)
   \end{block}
 \end{frame}
 
-\begin{frame}{Latihan 3: Sistem Menu Geometri Bertingkat}
-  \begin{block}{Soal 3: Kalkulator Geometri 2 Level}
+\begin{frame}[fragile]{Latihan 3: Kalkulator Geometri Bertingkat}
+  \begin{block}{Soal 3: Kalkulator Geometri Bertingkat}
     Buat program dengan \textbf{nested SWITCH} untuk menghitung bangun ruang:
+    
+    \textbf{Menu Level 1}: Pilih bangun ruang
     \begin{itemize}
-      \item \textbf{Menu Level 1}: Pilih bangun ruang
-        \begin{itemize}
-          \item 1: Lingkaran, 2: Tabung, 3: Kerucut, 4: Bola
-        \end{itemize}
-      \item \textbf{Menu Level 2}: Pilih perhitungan
-        \begin{itemize}
-          \item Lingkaran: 1-Luas, 2-Keliling
-          \item Tabung: 1-Volume, 2-Luas Permukaan
-          \item Kerucut: 1-Volume, 2-Luas Permukaan  
-          \item Bola: 1-Volume, 2-Luas Permukaan
-        \end{itemize}
-      \item \textbf{Fitur}: 
-        \begin{itemize}
-          \item Validasi input menu
-          \item Gunakan \texttt{Math.PI} untuk nilai π
-          \item Tampilkan rumus yang digunakan
-        \end{itemize}
+      \item 1: Lingkaran
+      \item 2: Tabung  
+      \item 3: Kerucut
+      \item 4: Bola
+    \end{itemize}
+    
+    \textbf{Menu Level 2}: Setiap bangun memiliki pilihan berbeda:
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 3: Kalkulator Geometri Bertingkat}
+  \begin{block}{}
+    \begin{itemize}
+      \item \textbf{Tabung}: 1-Volume ($\pi \times r^2 \times t$), 2-Luas Permukaan ($2 \times \pi \times r \times (r + t)$)
+      \item \textbf{Kerucut}: 1-Volume ($\frac{1}{3} \times \pi \times r^2 \times t$), 2-Luas Permukaan ($\pi \times r \times (r + s)$)
+      \item \textbf{Bola}: 1-Volume ($\frac{4}{3} \times \pi \times r^3$), 2-Luas Permukaan ($4 \times \pi \times r^2$)
+    \end{itemize}
+    
+    \textbf{Catatan}: 
+    \begin{itemize}
+      \item Gunakan \texttt{Math.PI} untuk nilai π
+      \item Tampilkan rumus yang digunakan dalam perhitungan
     \end{itemize}
   \end{block}
 \end{frame}
@@ -544,7 +591,7 @@ public class NestedSwitch {
   \begin{alertblock}{Inti Bab 6: Struktur Kontrol 2 - SWITCH}
     \begin{itemize}
       \item \textbf{SWITCH} alternatif yang elegan untuk multiple if-else
-      \item Mendukung berbagai tipe data: \texttt{char, byte, short, int, String}
+      \item Mendukung berbagai tipe data: \texttt{char, int, String, dan lain-lain}
       \item \textbf{BREAK} statement penting untuk mencegah fall through
       \item \textbf{DEFAULT} case menangani nilai tak terduga
       \item \textbf{Multiple case} untuk grouping aksi yang sama
@@ -562,8 +609,6 @@ public class NestedSwitch {
             Departemen Matematika FSAD ITS
       \item \textbf{Oracle Java Tutorials - The switch Statement}\\
             \url{https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html}
-      \item \textbf{GeeksforGeeks - Switch Statements in Java}\\
-            \url{https://www.geeksforgeeks.org/switch-statement-in-java/}
     \end{itemize}
   \end{block}
 \end{frame}
@@ -573,8 +618,8 @@ public class NestedSwitch {
     \begin{itemize}
       \item \textbf{Programiz - Java switch Statement}\\
             \url{https://www.programiz.com/java-programming/switch-statement}
-      \item \textbf{Baeldung - Java Switch Statement}\\
-            \url{https://www.baeldung.com/java-switch}
+    \item \textbf{GeeksforGeeks - Switch Statements in Java}\\
+            \url{https://www.geeksforgeeks.org/switch-statement-in-java/}
     \end{itemize}
   \end{block}
 \end{frame}
