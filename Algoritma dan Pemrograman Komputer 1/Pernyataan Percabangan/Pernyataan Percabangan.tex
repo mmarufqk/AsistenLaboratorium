@@ -107,6 +107,16 @@
   \end{table}
 \end{frame}
 
+\begin{frame}[fragile]{Flowchart BREAK}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{Pernyataan Percabangan/flowchart-break.png}
+    \caption{Flowchart Break}
+    \label{fig:placeholder}
+    \textbf{Sumber:} GeeksforGeeks - Java Break Statement
+\end{figure}
+\end{frame}
+
 \begin{frame}[fragile]{BREAK Tidak Berlabel (Unlabeled)}
   \begin{exampleblock}{Contoh BREAK dalam FOR Loop}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
@@ -189,6 +199,16 @@ public class BreakLabeled {
     \end{tabular}
     \caption{Jenis-jenis CONTINUE Statement}
   \end{table}
+\end{frame}
+
+\begin{frame}{Flowchart Continue}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\linewidth]{Pernyataan Percabangan/flowchart-continue.png}
+        \caption{Flowchart Continue}
+        \label{fig:placeholder}
+        \textbf{Sumber:} GeeksforGeeks - Java Continue Statement
+    \end{figure}
 \end{frame}
 
 \begin{frame}[fragile]{CONTINUE Tidak Berlabel (Unlabeled)}
@@ -397,14 +417,46 @@ public class CariKarakter {
 % Section 8: Latihan
 \section{Latihan}
 \begin{frame}{Latihan 1: Bilangan Prima dengan BREAK}
-  \begin{block}{Soal 1: Cek Bilangan Prima}
-    Buat program yang mengecek apakah suatu bilangan prima. Gunakan \textbf{BREAK} untuk mengoptimasi proses pengecekan.
+  \begin{block}{Soal 1: Optimasi Cek Bilangan Prima}
+    Buat program yang meminta input sebuah bilangan bulat positif \texttt{n}, kemudian menentukan apakah \texttt{n} merupakan bilangan prima atau bukan. 
+    
+    \textbf{Gunakan BREAK} untuk mengoptimasi proses - berhenti pengecekan begitu ditemukan pembagi selain 1 dan n itu sendiri.
+    
+    \textbf{Contoh:}
+    \begin{itemize}
+      \item Input: 7 → Output: "7 adalah bilangan prima"
+      \item Input: 9 → Output: "9 bukan bilangan prima"
+    \end{itemize}
   \end{block}
 \end{frame}
 
 \begin{frame}{Latihan 2: Skip Bilangan Genap}
   \begin{block}{Soal 2: Cetak Bilangan Ganjil dengan CONTINUE}
-    Buat program yang mencetak bilangan ganjil dari 1 sampai 20. Gunakan \textbf{CONTINUE} untuk melewatkan bilangan genap.
+    Buat program yang meminta input batas atas \texttt{n}, kemudian mencetak semua bilangan ganjil dari 1 sampai \texttt{n}. 
+    
+    \textbf{Gunakan CONTINUE} untuk melewatkan bilangan genap dalam loop.
+    
+    \textbf{Contoh (n = 10):}
+    \begin{itemize}
+      \item Output: 1 3 5 7 9
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Latihan 3: Validasi Input dengan RETURN}
+  \begin{block}{Soal 3: Early Exit dengan RETURN}
+    Buat program yang meminta input usia pengguna. Gunakan \textbf{RETURN} untuk early exit ketika:
+    \begin{itemize}
+      \item Input usia negatif → tampilkan "Usia tidak valid" dan hentikan program
+      \item Input usia $>$ 150 → tampilkan "Usia tidak realistis" dan hentikan program
+      \item Selain itu → tampilkan "Usia valid: [usia] tahun"
+    \end{itemize}
+    
+    \textbf{Contoh:}
+    \begin{itemize}
+      \item Input: -5 → Output: "Usia tidak valid"
+      \item Input: 25 → Output: "Usia valid: 25 tahun"
+    \end{itemize}
   \end{block}
 \end{frame}
 
@@ -415,7 +467,7 @@ public class CariKarakter {
     \begin{itemize}
       \item \textbf{BREAK}: Menghentikan perulangan/struktur kontrol secara paksa
       \item \textbf{CONTINUE}: Melompati iterasi saat ini dan lanjut ke iterasi berikutnya
-      \item \textbf{RETURN}: Keluar dari . Untuk method non main bisa dengan nilai kembalian
+      \item \textbf{RETURN}: Keluar dari method untuk method main. Untuk method non main bisa dengan nilai kembalian
     \end{itemize}
   \end{alertblock}
 \end{frame}
@@ -431,8 +483,17 @@ public class CariKarakter {
             \url{https://docs.oracle.com/javase/tutorial/java/nutsandbolts/branch.html}
       \item \textbf{GeeksforGeeks - Java Break and Continue}\\
             \url{https://www.geeksforgeeks.org/break-and-continue-statement-in-java/}
-      \item \textbf{TutorialsPoint - Java Methods}\\
-            \url{https://www.tutorialspoint.com/java/java_methods.htm}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Referensi}
+  \begin{block}{Referensi:}
+    \begin{itemize}
+      \item \textbf{GeeksforGeeks - Java Break Statement}\\
+            \url{https://www.geeksforgeeks.org/java/break-statement-in-java/}
+      \item \textbf{GeeksforGeeks - Java Continue Statement}\\
+            \url{https://www.geeksforgeeks.org/java/continue-statement-in-java/}
     \end{itemize}
   \end{block}
 \end{frame}
