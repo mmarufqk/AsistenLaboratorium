@@ -1,0 +1,445 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{listings}
+\usepackage{ragged2e}
+\usepackage{url}
+
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+
+\usetheme{metropolis}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{magenta}{rgb}{0.58,0,0.82}
+
+\lstset{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    columns=flexible
+}
+
+% Info presentasi
+\title{Algoritma dan Pemrograman Komputer 1}
+\subtitle{Bab 8: Pernyataan Percabangan}
+\author{Aslam Pandu Tasminto -- 5002241025 \\ M. Ma'ruf Qomaruddin Kafi -- 5002241095}
+\date{October 28, 2025}
+\institute{Departemen Matematika \\ Fakultas Sains dan Analitika Data \\ Institut Teknologi Sepuluh Nopember}
+
+\begin{document}
+
+% Cover
+\begin{frame}
+\maketitle
+\end{frame}
+
+% Daftar Isi
+\begin{frame}{Daftar Isi}
+  \tableofcontents
+\end{frame}
+
+% Section 1: Pengenalan Pernyataan Percabangan
+\section{Pengenalan Pernyataan Percabangan}
+\begin{frame}{Konsep Pernyataan Percabangan dalam Java}
+  \begin{block}{Apa itu Percabangan?}
+    \vspace{0.1cm}
+    Pernyataan percabangan adalah pernyataan yang digunakan untuk \textbf{mengatur alur eksekusi} program dengan cara mengubah urutan normal eksekusi kode.
+    Seperti \textbf{tombol kontrol} dalam program untuk:
+    \begin{itemize}
+    \vspace{-0.1cm}
+      \item \textbf{Berhenti} di tengah proses (\texttt{break})
+      \item \textbf{Lompati} langkah tertentu (\texttt{continue}) 
+      \item \textbf{Keluar} dari fungsi (\texttt{return})
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.2cm}
+  \begin{exampleblock}{Analoginya:}
+    Bayangkan sedang membaca buku:
+    \vspace{-0.2cm}
+    \begin{itemize}
+      \item \texttt{break} = berhenti baca bab ini
+      \item \texttt{continue} = lewati halaman ini
+      \item \texttt{return} = tutup buku, selesai membaca
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+% Section 2: BREAK Statement
+\section{BREAK Statement}
+\begin{frame}[fragile]{Sintaks dan Konsep BREAK}
+  \begin{block}{Fungsi BREAK Statement}
+    Menghentikan eksekusi loop (perulangan) atau percabangan (if else dan switch case) secara paksa dan keluar dari blok kode tersebut.
+  \end{block}
+  
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.3\textwidth}|p{0.65\textwidth}}
+    \textbf{Jenis BREAK} & \textbf{Deskripsi} \\
+    \hline
+    \rowcolor{gray!20}
+    \texttt{break} (unlabeled) & Menghentikan loop/switch terdekat \\
+    \rowcolor{white}
+    \texttt{break label} (labeled) & Menghentikan loop dengan label tertentu \\
+    \end{tabular}
+    \caption{Jenis-jenis BREAK Statement}
+  \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{BREAK Tidak Berlabel (Unlabeled)}
+  \begin{exampleblock}{Contoh BREAK dalam FOR Loop}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class BreakUnlabeled {
+    public static void main(String[] args) {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("i = " + i);
+            if (i == 2) {
+                break;  // Keluar loop saat i = 2
+            }
+        }
+        System.out.println("Loop selesai");
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+
+  \vspace{-0.4cm}
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{i = 0\\
+        i = 1\\
+        i = 2\\
+        Loop selesai}
+        }
+      }
+    }
+\end{frame}
+
+\begin{frame}[fragile]{BREAK Berlabel (Labeled)}
+  \begin{exampleblock}{Contoh BREAK dengan Label}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class BreakLabeled {
+    public static void main(String[] args) {
+        int x = 35;
+        int y = 4;
+        int dummy = y;
+        
+        mulai:
+        while(true) {
+            if(y > x) {
+                System.out.println("Nilai kelipatan y yang mendekati x adalah " + y);
+                break mulai;  // Keluar dari blok 'mulai'
+            }
+            y = y + dummy;
+        }
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+  
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\tiny
+        \texttt{Nilai kelipatan y yang mendekati x adalah 36}
+        }
+      }
+    }
+\end{frame}
+
+% Section 3: CONTINUE Statement
+\section{CONTINUE Statement}
+\begin{frame}[fragile]{Sintaks dan Konsep CONTINUE}
+  \begin{block}{Fungsi CONTINUE Statement}
+    Melompati sisa iterasi saat ini dalam loop dan langsung melanjutkan ke iterasi berikutnya.
+  \end{block}
+  
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.35\textwidth}|p{0.65\textwidth}}
+    \textbf{Jenis CONTINUE} & \textbf{Deskripsi} \\
+    \hline
+    \rowcolor{gray!20}
+    \texttt{continue} (unlabeled) & Melompati iterasi dalam loop terdekat \\
+    \rowcolor{white}
+    \texttt{continue label} (labeled) & Melompati iterasi dalam loop berlabel \\
+    \end{tabular}
+    \caption{Jenis-jenis CONTINUE Statement}
+  \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{CONTINUE Tidak Berlabel (Unlabeled)}
+  \begin{exampleblock}{Contoh CONTINUE dalam FOR Loop}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class ContinueUnlabeled {
+    public static void main(String[] args) {
+        for(int i = 0; i < 5; i++) {
+            if(i == 2) {
+                continue;  // Lewati saat i = 2
+            }
+            System.out.println("i = " + i);
+        }
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+
+  \vspace{-0.2cm}
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{i = 0\\
+        i = 1\\
+        i = 3\\
+        i = 4}
+        }
+      }
+    }
+\end{frame}
+
+% Section 4: RETURN Statement
+\section{RETURN Statement}
+\begin{frame}[fragile]{Sintaks dan Konsep RETURN}
+  \begin{block}{Fungsi RETURN Statement}
+    \vspace{0.2cm}
+    Menghentikan eksekusi program atau method.
+    \\ Dalam \textbf{main method} return digunakan untuk menghentikan program secara paksa.
+    
+    \textbf{\alert{Note:}} Return untuk method akan dipelajari di Modul 9 (Fungsi/Method)
+  \end{block}
+  
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.35\textwidth}|p{0.65\textwidth}}
+    \textbf{Jenis RETURN} & \textbf{Deskripsi} \\
+    \hline
+    \rowcolor{gray!20}
+    \texttt{return} (di main) & Menghentikan program secara paksa \\
+    \rowcolor{white}
+    \texttt{return value} (di method) & Mengembalikan nilai (Modul 9) \\
+    \end{tabular}
+    \caption{Jenis-jenis RETURN Statement}
+  \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{RETURN untuk Menghentikan Program}
+\vspace{-0.2cm}
+  \begin{exampleblock}{Contoh RETURN di Main Method}
+    \begin{lstlisting}[basicstyle=\ttfamily\tiny]
+class kembali {
+    public static void main (String args[]) {
+        System.out.println("Masukan nilai suatu bilangan");
+        Scanner baca = new Scanner(System.in);
+        int k = baca.nextInt();
+        
+        if(k % 2 == 0) {
+            System.out.println(k + " merupakan bilangan genap");
+            return;  // BERHENTI di sini ketika k genap
+        }
+        
+        System.out.println(k + " merupakan bilangan ganjil");
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+
+\vspace{-0.2cm}
+\textbf{Output Program (input = 4)}
+  \colorbox{gray!20}{
+    \parbox{0.9\textwidth}{
+      {\tiny
+      \texttt{Masukan nilai suatu bilangan\\[-0.5em]
+      4\\[-0.5em]
+      4 merupakan bilangan genap}
+      }
+    }
+  }
+\end{frame}
+
+\begin{frame}[fragile]{RETURN untuk Menghentikan Program (Part 2)}
+  \begin{exampleblock}{Method check() - Akan dipelajari di Modul 9}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    // Method ini akan dipelajari di Modul 9
+    public static String check(int k) {
+        if(k % 2 == 0) {
+            return "genap";
+        } else {
+            return "ganjil";
+        }
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+  
+  \textbf{Output Program (jika input = 7)}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{Masukan nilai suatu bilangan\\
+        7\\
+        7 merupakan bilangan ganjil}
+        }
+      }
+    }
+\end{frame}
+
+% Section 5: Perbandingan BREAK vs CONTINUE vs RETURN
+\section{Perbandingan BREAK vs CONTINUE vs RETURN}
+\begin{frame}{Perbandingan BREAK vs CONTINUE vs RETURN}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}}
+    \textbf{Kriteria} & \textbf{BREAK} & \textbf{CONTINUE} & \textbf{RETURN} \\
+    \hline
+    \rowcolor{gray!20}
+    Efek & Menghentikan loop & Skip iterasi & Keluar method \\
+    \rowcolor{white}
+    Scope & Loop/switch & Loop saja & Method saja \\
+    \rowcolor{gray!20}
+    Eksekusi selanjutnya & Keluar loop & Iterasi berikutnya & Pemanggil method \\
+    \rowcolor{white}
+    Penggunaan & Pencarian, exit condition & Filter data & Early exit, validasi \\
+    \rowcolor{gray!20}
+    Dapat berlabel & Ya & Ya & Tidak \\
+    \rowcolor{white}
+    Dipakai di switch & Ya & Tidak & Ya \\
+    \end{tabular}
+    \caption{Perbandingan BREAK vs CONTINUE vs RETURN Statement}
+  \end{table}
+\end{frame}
+
+% Section 6: Best Practices
+\section{Best Practices}
+\begin{frame}{Best Practices Penggunaan Percabangan}
+  \begin{alertblock}{Tips dan Rekomendasi}
+    \begin{itemize}
+      \item \textbf{Gunakan BREAK dengan hati-hati} - Dapat membuat alur program sulit dilacak
+      \item \textbf{Hindari BREAK/CONTINUE berlebihan} - Dapat mengurangi readability
+      \item \textbf{Pertimbangkan alternatif} - Terkadang kondisi loop yang baik lebih baik daripada BREAK
+      \item \textbf{Gunakan CONTINUE untuk skip kondisi} - Lebih jelas daripada nested if
+      \item \textbf{Gunakan RETURN untuk early exit} - Efisien untuk validasi input di awal method
+      \item \textbf{Hindari multiple return points} - Kecuali untuk early validation yang jelas
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 7: Contoh Program
+\section{Contoh Kasus}
+\begin{frame}[fragile]{Studi Kasus 1: Validasi Input}
+  \begin{exampleblock}{Validasi Input dengan RETURN Early}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class InputValidator {
+    public static void main(String[] args) {
+        System.out.println("Masukkan usia:");
+        Scanner input = new Scanner(System.in);
+        int age = input.nextInt();
+        
+        if(age < 0) {
+            System.out.println("Usia tidak valid");
+            return;  // Hentikan program
+        }
+        if(age > 150) {
+            System.out.println("Usia tidak realistis");
+            return;  // Hentikan program
+        }
+        
+        System.out.println("Usia valid: " + age);
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Studi Kasus 2: Pencarian Karakter}
+  \begin{exampleblock}{Pencarian dengan BREAK}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class CariKarakter {
+    public static void main(String[] args) {
+        String teks = "programming";
+        char target = 'g';
+        
+        for(int i = 0; i < teks.length(); i++) {
+            if(teks.charAt(i) == target) {
+                System.out.println("Karakter '" + target + "' ditemukan di index: " + i);
+                break;  // Berhenti setelah ketemu pertama
+            }
+        }
+    }
+}
+    \end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 8: Latihan
+\section{Latihan}
+\begin{frame}{Latihan 1: Bilangan Prima dengan BREAK}
+  \begin{block}{Soal 1: Cek Bilangan Prima}
+    Buat program yang mengecek apakah suatu bilangan prima. Gunakan \textbf{BREAK} untuk mengoptimasi proses pengecekan.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Latihan 2: Skip Bilangan Genap}
+  \begin{block}{Soal 2: Cetak Bilangan Ganjil dengan CONTINUE}
+    Buat program yang mencetak bilangan ganjil dari 1 sampai 20. Gunakan \textbf{CONTINUE} untuk melewatkan bilangan genap.
+  \end{block}
+\end{frame}
+
+% Section 9: Kesimpulan
+\section{Kesimpulan}
+\begin{frame}{Kesimpulan}
+  \begin{alertblock}{Inti Bab 8: Pernyataan Percabangan}
+    \begin{itemize}
+      \item \textbf{BREAK}: Menghentikan perulangan/struktur kontrol secara paksa
+      \item \textbf{CONTINUE}: Melompati iterasi saat ini dan lanjut ke iterasi berikutnya
+      \item \textbf{RETURN}: Keluar dari . Untuk method non main bisa dengan nilai kembalian
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 10: Referensi
+\section{Referensi}
+\begin{frame}{Referensi}
+  \begin{block}{Referensi:}
+    \begin{itemize}
+      \item \textbf{Modul Praktikum Algoritma dan Pemrograman - Modul 8}\\
+            Departemen Matematika FSAD ITS
+      \item \textbf{Oracle Java Tutorials - Branching Statements}\\
+            \url{https://docs.oracle.com/javase/tutorial/java/nutsandbolts/branch.html}
+      \item \textbf{GeeksforGeeks - Java Break and Continue}\\
+            \url{https://www.geeksforgeeks.org/break-and-continue-statement-in-java/}
+      \item \textbf{TutorialsPoint - Java Methods}\\
+            \url{https://www.tutorialspoint.com/java/java_methods.htm}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% Penutup
+\begin{frame}[standout]
+  \Huge \textbf{Terima Kasih}
+\end{frame}
+
+\end{document}
