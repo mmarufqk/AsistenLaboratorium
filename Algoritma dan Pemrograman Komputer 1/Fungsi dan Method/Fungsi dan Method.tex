@@ -1,0 +1,581 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{listings}
+\usepackage{ragged2e}
+\usepackage{url}
+
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+
+\usetheme{metropolis}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{magenta}{rgb}{0.58,0,0.82}
+
+\lstset{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    columns=flexible
+}
+
+% Info presentasi
+\title{Algoritma dan Pemrograman Komputer 1}
+\subtitle{Bab 9: Fungsi/Method}
+\author{Aslam Pandu Tasminto -- 5002241025 \\ M. Ma'ruf Qomaruddin Kafi -- 5002241095}
+\date{November 2024}
+\institute{Departemen Matematika \\ Fakultas Sains dan Analitika Data \\ Institut Teknologi Sepuluh Nopember}
+
+% Logo untuk title page
+\titlegraphic{%
+  \includegraphics[height=0.9cm]{Fungsi dan Method/logoprovikom.jpg}%
+  \hspace{0.5em}%
+  \includegraphics[height=0.9cm]{Fungsi dan Method/logomatematika.png}%
+  \hspace{0.5em}%
+  \includegraphics[height=1cm]{Fungsi dan Method/logoits.png}%
+}
+
+\begin{document}
+
+% Cover
+\begin{frame}
+\maketitle
+\end{frame}
+
+% Daftar Isi
+\begin{frame}{Daftar Isi}
+  \tableofcontents
+\end{frame}
+
+% Section 1: Pengenalan Fungsi/Method
+\section{Pengenalan Fungsi/Method}
+\begin{frame}{Konsep Dasar Fungsi/Method}
+  \begin{block}{Apa itu Fungsi/Method?}
+    \vspace{0.1cm}
+    Fungsi/Method adalah kumpulan beberapa pernyataan yang dikelompokkan untuk melakukan suatu operasi tertentu.
+    \begin{itemize}
+      \item Seperti \textbf{mesin kecil} dalam program yang melakukan tugas spesifik
+      \item Dapat dipanggil berulang kali dari berbagai bagian program
+      \item Meningkatkan \textbf{reusability}, \textbf{readability}, \textbf{modularity}, dan \textbf{maintainability} kode
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.2cm}
+  \begin{alertblock}{Konsep Fundamental Method}
+  \scriptsize
+    Dalam memahami method, terdapat 3 konsep fundamental yang harus dikuasai:
+    \begin{enumerate}
+      \item \textbf{Parameter} - Input data yang diproses method
+      \item \textbf{Statement} - Logika dan operasi yang dilakukan  
+      \item \textbf{Return Type/Value} - Output hasil pemrosesan
+    \end{enumerate}
+    \textbf{Penting:} Meskipun secara teknis parameter bisa kosong dan return type bisa void, ketiga konsep ini merupakan fondasi pemahaman method.
+  \end{alertblock}
+\end{frame}
+
+% Section 2: Struktur Fungsi/Method
+\section{Struktur Fungsi/Method}
+\begin{frame}[fragile]{Anatomi Fungsi/Method}
+  \begin{block}{6 Komponen Utama Fungsi/Method}
+    \begin{enumerate}
+      \item \textbf{Modifier} - Akses kontrol (\texttt{public static})
+      \item \textbf{Return Type} - Tipe data kembalian
+      \item \textbf{Nama Method} - Identifier fungsi
+      \item \textbf{Parameter} - Data input method
+      \item \textbf{Exception} - Penanganan error
+      \item \textbf{Statement} - Badan method
+    \end{enumerate}
+  \end{block}
+
+  \begin{exampleblock}{Contoh Struktur}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public static boolean isBigger(int a, int b) {
+    if (a > b) {
+        return true;    // Return Value
+    } else { 
+        return false;   // Return Value
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 3: Aturan Penamaan
+\section{Aturan Penamaan}
+\begin{frame}{Konvensi Penamaan Method}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.3\textwidth}|p{0.65\textwidth}}
+    \textbf{Pattern} & \textbf{Contoh dan Penjelasan} \\
+    \hline
+    \rowcolor{gray!20}
+    \texttt{camelCase} & \texttt{calculateArea(), getUserName()} \\
+    \rowcolor{white}
+    Awalan huruf kecil & \texttt{make(), processData(), isEmpty()} \\
+    \rowcolor{gray!20}
+    Kata kerja deskriptif & \texttt{convertToMeter(), validateInput()} \\
+    \rowcolor{white}
+    Konsisten & \texttt{getX(), setX(), isX(), hasX()} \\
+    \end{tabular}
+    \caption{Konvensi Penamaan Method yang Direkomendasikan}
+  \end{table}
+
+  \begin{alertblock}{Best Practice}
+    \begin{itemize}
+      \item Gunakan nama yang menjelaskan \textbf{apa yang dilakukan} method
+      \item Hindari nama singkat yang tidak jelas (\texttt{proc(), calc()})
+      \item Untuk boolean, gunakan awalan \texttt{is}, \texttt{has}, \texttt{can}
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 4: Jenis-jenis Method
+\section{Jenis-jenis Method}
+\begin{frame}[fragile]{Method Tanpa Parameter}
+  \begin{exampleblock}{Method Tanpa Input Parameter}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+class MethodSederhana {
+    public static void sapa() {
+        System.out.println("Halo! Selamat belajar Java!");
+    }
+    
+    public static void main(String[] args) {
+        sapa();  // Memanggil method
+        sapa();  // Bisa dipanggil berkali-kali
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{Halo! Selamat belajar Java!\\
+        Halo! Selamat belajar Java!}
+        }
+      }
+    }
+\end{frame}
+
+\begin{frame}[fragile]{Method Dengan Parameter}
+  \begin{exampleblock}{Method dengan Input Parameter}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+class MethodParameter {
+    public static void sapaNama(String nama) {
+        System.out.println("Halo, " + nama + "!");
+    }
+    
+    public static void hitungLuas(int panjang, int lebar) {
+        int luas = panjang * lebar;
+        System.out.println("Luas: " + luas);
+    }
+    
+    public static void main(String[] args) {
+        sapaNama("Budi");
+        hitungLuas(5, 3);
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+    \vspace{-0.3cm}
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+    \scriptsize
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{Halo, Budi!\\
+        Luas: 15}
+        }
+      }
+    }
+\end{frame}
+
+\begin{frame}[fragile]{Method Dengan Return Value}
+\vspace{-0.25cm}
+  \begin{exampleblock}{Method yang Mengembalikan Nilai}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class MethodReturn {
+    public static int tambah(int a, int b) {
+        return a + b;
+    }
+    
+    public static boolean adalahGenap(int angka) {
+        return angka % 2 == 0;
+    }
+    
+    public static void main(String[] args) {
+        int hasil = tambah(10, 5);
+        boolean cek = adalahGenap(hasil);
+        
+        System.out.println("10 + 5 = " + hasil);
+        System.out.println(hasil + " genap? " + cek);
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+    \vspace{-0.65cm}
+  \textbf{Output Program}
+  \tiny
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{10 + 5 = 15\\
+        15 genap? false}
+        }
+      }
+    }
+\end{frame}
+
+\begin{frame}[fragile]{Method Rekursif}
+  \begin{exampleblock}{Contoh Method Rekursif (Faktorial)}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+class MethodRekursif {
+    public static int faktorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else {
+            return n * faktorial(n - 1);
+        }
+    }
+    
+    public static void main(String[] args) {
+        int angka = 5;
+        int hasil = faktorial(angka);
+        System.out.println(angka + "! = " + hasil);
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{5! = 120}
+        }
+      }
+    }
+\end{frame}
+
+
+% Section 5: Parameter vs Argument
+\section{Parameter vs Argument}
+\begin{frame}[fragile]{Perbedaan Parameter dan Argument}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
+    \textbf{Parameter} & \textbf{Argument} \\
+    \hline
+    \rowcolor{gray!20}
+    Variabel dalam deklarasi method & Nilai aktual yang diberikan saat pemanggilan \\
+    \rowcolor{white}
+    \texttt{String nama} dalam deklarasi & \texttt{"Budi"} saat memanggil method \\
+    \rowcolor{gray!20}
+    Seperti variabel yang didapat & Seperti nilai yang diisi \\
+    \rowcolor{white}
+    Ditentukan saat menulis method & Diberikan saat menggunakan method \\
+    \end{tabular}
+    \caption{Perbedaan Konseptual Parameter dan Argument}
+  \end{table}
+
+  \begin{exampleblock}{Contoh}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+// Parameter: 'nama' dan 'umur'
+public static void perkenalan(String nama, int umur) {
+    System.out.println("Nama: " + nama + ", Umur: " + umur);
+}
+
+// Argument: "Alice" dan 20
+perkenalan("Alice", 20);
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 6: Method Overloading
+\section{Method Overloading}
+\begin{frame}[fragile]{Konsep Method Overloading}
+\vspace{-0.2cm}
+  \begin{block}{Apa itu Overloading?}
+    Membuat beberapa method dengan \textbf{nama sama} tetapi \textbf{parameter berbeda} (jumlah atau tipe data).
+  \end{block}
+
+\vspace{-0.1cm}
+  \begin{exampleblock}{Contoh Overloading}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class Calculator {
+    // Versi 1: dua parameter integer
+    public static int tambah(int a, int b) {
+        return a + b;
+    }
+    
+    // Versi 2: tiga parameter integer  
+    public static int tambah(int a, int b, int c) {
+        return a + b + c;
+    }
+    
+    // Versi 3: parameter double
+    public static double tambah(double a, double b) {
+        return a + b;
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Penggunaan Method Overloading}
+  \begin{exampleblock}{Implementasi dalam Program}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class Calculator {
+    public static void main(String[] args) {
+        // Memanggil versi berbeda berdasarkan parameter
+        int hasil1 = tambah(5, 3);
+        int hasil2 = tambah(1, 2, 3);
+        double hasil3 = tambah(2.5, 3.7);
+        
+        System.out.println("5 + 3 = " + hasil1);
+        System.out.println("1 + 2 + 3 = " + hasil2);
+        System.out.println("2.5 + 3.7 = " + hasil3);
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\scriptsize
+        \texttt{5 + 3 = 8\\
+        1 + 2 + 3 = 6\\
+        2.5 + 3.7 = 6.2}
+        }
+      }
+    }
+\end{frame}
+
+% Section 7: Studi Kasus
+\section{Studi Kasus}
+\begin{frame}[fragile]{Studi Kasus 1: Kalkulator}
+\vspace{-0.3cm}
+  \begin{exampleblock}{Implementasi Kalkulator dengan Method}
+  \vspace{-0.15cm}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class Kalkulator {
+    public static double tambah(double a, double b) {
+        return a + b;
+    }
+    
+    public static double kurang(double a, double b) {
+        return a - b;
+    }
+    
+    public static double kali(double a, double b) {
+        return a * b;
+    }
+    
+    public static double bagi(double a, double b) {
+        if (b == 0) {
+            System.out.println("Error: Pembagian dengan nol!");
+            return 0;
+        }
+        return a / b;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("10 + 5 = " + tambah(10, 5));
+        System.out.println("10 - 5 = " + kurang(10, 5));
+        System.out.println("10 * 5 = " + kali(10, 5));
+        System.out.println("10 / 5 = " + bagi(10, 5));
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Studi Kasus 2: Validasi Data}
+  \begin{exampleblock}{Method untuk Validasi Input}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class Validator {
+    public static boolean isValidEmail(String email) {
+        return email.contains("@") && email.contains(".");
+    }
+    
+    public static boolean isValidAge(int age) {
+        return age >= 0 && age <= 150;
+    }
+    
+    public static boolean isStrongPassword(String password) {
+        return password.length() >= 8 && 
+               !password.equals(password.toLowerCase());
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("Email valid? " + isValidEmail("user@example.com"));
+        System.out.println("Umur valid? " + isValidAge(25));
+        System.out.println("Password kuat? " + isStrongPassword("Pass1234"));
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 8: Keuntungan Penggunaan Method
+\section{Keuntungan Method}
+\begin{frame}{Manfaat Penggunaan Method}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.3\textwidth}|p{0.65\textwidth}}
+    \textbf{Keuntungan} & \textbf{Deskripsi} \\
+    \hline
+    \rowcolor{gray!20}
+    Reusability & Dapat dipakai berulang tanpa menulis ulang kode \\
+    \rowcolor{white}
+    Modularity & Memecah program kompleks menjadi bagian kecil \\
+    \rowcolor{gray!20}
+    Maintainability & Mudah di-maintain dan debug \\
+    \rowcolor{white}
+    Readability & Kode lebih terstruktur dan mudah dibaca \\
+    \rowcolor{gray!20}
+    Testing & Mudah di-test secara terpisah \\
+    \rowcolor{white}
+    Collaboration & Memungkinkan kerja tim yang lebih baik \\
+    \end{tabular}
+    \caption{Keuntungan Menggunakan Method dalam Pemrograman}
+  \end{table}
+\end{frame}
+
+% Section 9: Best Practices
+\section{Best Practices}
+\begin{frame}{Best Practices Penggunaan Method}
+  \begin{alertblock}{Tips dan Rekomendasi}
+    \begin{itemize}
+      \item \textbf{Satu tugas satu method} - Setiap method harus melakukan satu tugas spesifik
+      \item \textbf{Nama deskriptif} - Nama method harus jelas menjelaskan fungsinya
+      \item \textbf{Parameter minimal} - Gunakan parameter secukupnya, hindari terlalu banyak
+      \item \textbf{Return early} - Keluar dari method secepat mungkin jika kondisi terpenuhi
+      \item \textbf{Fokus pada tugas} - Method sebaiknya hanya mengolah input menjadi output
+      \item \textbf{Dokumentasi} - Berikan komentar untuk method yang kompleks
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 10: Latihan
+\section{Latihan}
+\begin{frame}[fragile]{Latihan 1: Method Dasar}
+  \begin{block}{Soal 1: Method Sederhana}
+    Buat method \texttt{volumeTabung(double r, double t)} yang mengembalikan volume tabung. 
+    \textbf{Rumus:} $V = \pi \times r^2 \times t$
+    
+    \textbf{Contoh:}
+    \begin{itemize}
+      \item Input: r=7, t=10 → Output: 1539.38 (sekitar)
+      \item Gunakan \texttt{Math.PI} untuk nilai π
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 2: Method Boolean}
+  \begin{block}{Soal 2: Validasi Bilangan}
+    Buat method \texttt{isBilanganPrima(int n)} yang mengembalikan \texttt{true} jika bilangan prima, \texttt{false} jika bukan.
+    
+    \textbf{Ciri bilangan prima:}
+    \begin{itemize}
+      \item Hanya bisa dibagi 1 dan dirinya sendiri
+      \item Contoh: 2, 3, 5, 7, 11, 13, ...
+    \end{itemize}
+    
+    \textbf{Contoh:}
+    \begin{itemize}
+      \item Input: 7 → Output: true
+      \item Input: 9 → Output: false
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 3: Method Rekursif}
+  \begin{block}{Soal 3: Deret Fibonacci}
+    Buat method rekursif \texttt{fibonacci(int n)} yang mengembalikan suku ke-n dari deret Fibonacci.
+    
+    \textbf{Rumus Fibonacci:}
+    \begin{itemize}
+      \item F(1) = 1, F(2) = 1
+      \item F(n) = F(n-1) + F(n-2) untuk n \textgreater 2
+    \end{itemize}
+    
+    \textbf{Contoh:}
+    \begin{itemize}
+      \item Input: 5 → Output: 5
+      \item Input: 7 → Output: 13
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% Section 11: Kesimpulan
+\section{Kesimpulan}
+\begin{frame}{Kesimpulan}
+  \begin{alertblock}{Inti Bab 9: Fungsi/Method}
+    \begin{itemize}
+      \item \textbf{Fungsi/Method} adalah blok kode yang melakukan tugas spesifik dan dapat dipanggil berulang
+      \item \textbf{Struktur method} terdiri dari 6 komponen: modifier, return type, nama method, parameter, exception, statement
+      \item \textbf{Jenis method}: tanpa parameter, dengan parameter, dengan return value, dan rekursif
+      \item \textbf{Method overloading} memungkinkan beberapa method dengan nama sama tetapi parameter berbeda
+      \item Penggunaan method meningkatkan \textbf{Reusability, Readability, Modularity, dan Maintainability} kode
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 12: Referensi
+\section{Referensi}
+\begin{frame}{Referensi}
+  \begin{block}{Referensi:}
+    \begin{itemize}
+      \item \textbf{Modul Praktikum Algoritma dan Pemrograman - Modul 9}\\
+            Departemen Matematika FSAD ITS
+      \item \textbf{Oracle Java Tutorials - Defining Methods}\\
+            \url{https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html}
+      \item \textbf{GeeksforGeeks - Methods in Java}\\
+            \url{https://www.geeksforgeeks.org/methods-in-java/}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Referensi}
+  \begin{block}{Referensi:}
+    \begin{itemize}
+      \item \textbf{W3Schools - Java Methods}\\
+            \url{https://www.w3schools.com/java/java_methods.asp}
+      \item \textbf{Programiz - Java Methods}\\
+            \url{https://www.programiz.com/java-programming/methods}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% Penutup
+\begin{frame}[standout]
+  \Huge \textbf{Terima Kasih}
+\end{frame}
+
+\end{document}
