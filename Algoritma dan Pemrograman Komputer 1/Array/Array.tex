@@ -1,0 +1,694 @@
+\documentclass{beamer}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{listings}
+\usepackage{ragged2e}
+\usepackage{url}
+
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+
+\usetheme{metropolis}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{magenta}{rgb}{0.58,0,0.82}
+
+\lstset{
+    language=Java,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single,
+    columns=flexible
+}
+
+% Info presentasi
+\title{Algoritma dan Pemrograman Komputer 1}
+\subtitle{Bab 10: Array}
+\author{Aslam Pandu Tasminto -- 5002241025 \\ M. Ma'ruf Qomaruddin Kafi -- 5002241095}
+\date{November 2024}
+\institute{Departemen Matematika \\ Fakultas Sains dan Analitika Data \\ Institut Teknologi Sepuluh Nopember}
+
+% Logo untuk title page
+\titlegraphic{%
+  \includegraphics[height=0.9cm]{Fungsi dan Method/logoprovikom.jpg}%
+  \hspace{0.5em}%
+  \includegraphics[height=0.9cm]{Fungsi dan Method/logomatematika.png}%
+  \hspace{0.5em}%
+  \includegraphics[height=1cm]{Fungsi dan Method/logoits.png}%
+}
+
+\begin{document}
+
+% Cover
+\begin{frame}
+\maketitle
+\end{frame}
+
+% Daftar Isi
+\begin{frame}{Daftar Isi}
+  \vspace{0.2cm}
+  \tableofcontents
+\end{frame}
+
+% Section 1: Pengenalan Array
+\section{Pengenalan Array}
+\begin{frame}{Konsep Dasar Array}
+  \scriptsize
+  \begin{block}{Apa itu Array?}
+    \vspace{0.1cm}
+    Array adalah struktur data yang menyimpan kumpulan elemen dengan \textbf{tipe data yang sama} dalam satu variabel.
+    \begin{itemize}
+      \item Seperti \textbf{deretan loker} dengan nomor-nomor berurutan
+      \item Setiap elemen diakses melalui \textbf{indeks} (dimulai dari 0)
+      \item Memudahkan pengelolaan data dalam jumlah banyak
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.2cm}
+  \begin{alertblock}{Analogi Array}
+    Bayangkan array seperti deretan \textbf{loker sekolah}:
+    \begin{itemize}
+      \item Setiap loker memiliki \textbf{nomor} (indeks)
+      \item Isi setiap loker harus \textbf{sejenis} (tipe data sama)
+      \item Sekolah tersebut memiliki jumlah loker tertentu (ukuran array)
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Tanpa Array vs Dengan Array}
+  \scriptsize
+  \begin{columns}
+    % Kolom Kiri - Tanpa Array
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Tanpa Array}
+        \begin{itemize}
+          \item Banyak variabel terpisah
+          \item Sulit dikelola
+          \item Tidak efisien
+        \end{itemize}
+      \end{block}
+      
+      \begin{exampleblock}{Kode Tanpa Array}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+String pemilik_kotak_1 = "Udin";
+String pemilik_kotak_2 = "Joko";
+String pemilik_kotak_3 = "Budi";
+String pemilik_kotak_4 = "Sari";
+String pemilik_kotak_5 = "Rina";
+String pemilik_kotak_6 = "Gibran";
+// ... dan seterusnya
+// untuk 100 kotak?
+\end{lstlisting}
+      \end{exampleblock}
+      
+      \begin{alertblock}{Masalah}
+        \begin{itemize}
+          \item Bagaimana jika ada 1000 kotak?
+          \item Sulit melakukan operasi massal
+          \item Kode menjadi sangat panjang
+        \end{itemize}
+      \end{alertblock}
+    \end{column}
+    
+    % Pembatas
+    \begin{column}{0.04\textwidth}
+      \centering
+    \end{column}
+    
+    % Kolom Kanan - Dengan Array
+    \begin{column}{0.48\textwidth}
+      \begin{block}{Dengan Array}
+        \begin{itemize}
+          \item Satu variabel untuk semua
+          \item Mudah dikelola
+          \item Sangat efisien
+        \end{itemize}
+      \end{block}
+      
+      \begin{exampleblock}{Kode Dengan Array}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+String[] pemilik_kotak = {
+  "Udin", "Joko", "Budi", 
+  "Sari", "Rina", "Gibran"
+};
+// Akses mudah dengan index
+// pemilik_kotak[0] = "Udin"
+// pemilik_kotak[1] = "Joko"
+\end{lstlisting}
+      \end{exampleblock}
+      
+      \begin{alertblock}{Keuntungan}
+        \begin{itemize}
+          \item Dapat menampung ribuan data
+          \item Mudah di-loop dan diproses
+          \item Kode lebih bersih dan terstruktur
+        \end{itemize}
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% Section 2: Keuntungan Penggunaan Array
+\section{Keuntungan Array}
+\begin{frame}{Manfaat Penggunaan Array}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{p{0.3\textwidth}|p{0.65\textwidth}}
+    \textbf{Keuntungan} & \textbf{Deskripsi} \\
+    \hline
+    \rowcolor{gray!20}
+    Efisiensi Memory & Menyimpan banyak data dalam satu variabel \\
+    \rowcolor{white}
+    Akses Random & Dapat mengakses elemen mana saja langsung via index \\
+    \rowcolor{gray!20}
+    Kode Lebih Rapi & Tidak perlu banyak variabel untuk data sejenis \\
+    \rowcolor{white}
+    Mudah di-Loop & Dapat diproses secara massal dengan looping \\
+    \rowcolor{gray!20}
+    Kesesuaian Algoritma & Cocok untuk sorting, searching, dll. \\
+    \rowcolor{white}
+    Kemudahan Maintenance & Lebih mudah dikelola daripada banyak variabel terpisah \\
+    \end{tabular}
+    \caption{Keuntungan Menggunakan Array dalam Pemrograman}
+  \end{table}
+\end{frame}
+
+% Section 3: Deklarasi Array
+\section{Deklarasi Array}
+\begin{frame}[fragile]{Cara Mendeklarasikan Array}
+  \begin{block}{3 Cara Deklarasi Array dalam Java}
+    \begin{enumerate}
+      \item \textbf{Deklarasi kemudian inisialisasi}
+      \item \textbf{Deklarasi dan alokasi memory}
+      \item \textbf{Deklarasi dengan nilai langsung}
+    \end{enumerate}
+  \end{block}
+
+  \begin{exampleblock}{Contoh Deklarasi Array}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+// Cara 1: Deklarasi kemudian inisialisasi
+int[] angka;
+angka = new int[5];
+
+// Cara 2: Deklarasi dan alokasi memory  
+int[] angka = new int[5];
+
+// Cara 3: Deklarasi dengan nilai langsung
+int[] angka = {1, 2, 3, 4, 5};
+String[] nama = {"Udin", "Joko", "Budi"};
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 4: Mengakses Elemen Array
+\section{Mengakses Elemen Array}
+\scriptsize
+\begin{frame}[fragile]{Cara Mengakses dan Mengubah Elemen Array}
+  \begin{block}{Menggunakan Index}
+    \begin{itemize}
+      \item Index dimulai dari \textbf{0} sampai \textbf{panjang array - 1}
+      \item Syntax: \texttt{namaArray[index]}
+      \item Dapat membaca dan mengubah nilai elemen
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Contoh Akses Elemen}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class AksesArray {
+    public static void main(String[] args) {
+        int[] nilai = {85, 90, 78, 92, 88};
+        
+        // Mengakses elemen
+        System.out.println("Nilai pertama: " + nilai[0]); // 85
+        System.out.println("Nilai ketiga: " + nilai[2]);  // 78
+        
+        // Mengubah elemen
+        nilai[1] = 95; // Mengubah nilai kedua
+        System.out.println("Nilai kedua sekarang: " + nilai[1]); // 95
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 5: Panjang Array
+\section{Panjang Array}
+\scriptsize
+\begin{frame}[fragile]{Menggunakan Property .length}
+  \begin{block}{Property .length}
+    \begin{itemize}
+      \item Setiap array memiliki property \texttt{.length}
+      \item Menghasilkan \textbf{ukuran array} (banyaknya elemen)
+      \item Berguna untuk looping dan batas akses array
+    \end{itemize}
+  \end{block}
+
+\vspace{-0.2cm}
+  \begin{exampleblock}{Contoh Penggunaan .length}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class PanjangArray {
+    public static void main(String[] args) {
+        int[] bilangan = {10, 20, 30, 40, 50};
+        String[] buah = {"Apel", "Jeruk", "Mangga"};
+        
+        System.out.println("Panjang array bilangan: " + bilangan.length); // 5
+        System.out.println("Panjang array buah: " + buah.length); // 3
+        
+        // Looping dengan .length
+        for(int i = 0; i < bilangan.length; i++) {
+            System.out.println("Elemen " + i + ": " + bilangan[i]);
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 6: Inisialisasi Array
+\section{Inisialisasi Array}
+\begin{frame}[fragile]{Inisialisasi Langsung}
+
+  \begin{exampleblock}{Inisialisasi Langsung}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+class InisialisasiLangsung {
+    public static void main(String[] args) {
+        // Inisialisasi dengan nilai langsung
+        int[] angka = {15, 25, 30, 45};
+        String[] nama = {"Jhonny", "Nando", "Queren"};
+        
+        System.out.println("Array angka: ");
+        for(int i : angka) {
+            System.out.print(i + " ");
+        }
+        
+        System.out.println("\nArray nama: ");
+        for(String n : nama) {
+            System.out.print(n + " ");
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\tiny
+        \texttt{Array angka: 15 25 30 45 \\
+        Array nama: Jhonny Nando Queren}
+        }
+      }
+    }
+\end{frame}
+
+\begin{frame}[fragile]{Inisialisasi Per Elemen}
+  \begin{exampleblock}{Inisialisasi Elemen Secara Individual}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+class InisialisasiPerElemen {
+    public static void main(String[] args) {
+        // Deklarasi array
+        String[] mahasiswa = new String[3];
+        
+        // Inisialisasi per elemen
+        mahasiswa[0] = "Jhonny";
+        mahasiswa[1] = "Nando"; 
+        mahasiswa[2] = "Queren";
+        
+        // Menampilkan semua elemen
+        System.out.println("Daftar Mahasiswa:");
+        for(int i = 0; i < mahasiswa.length; i++) {
+            System.out.println((i+1) + ". " + mahasiswa[i]);
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\tiny
+        \texttt{Daftar Mahasiswa: \\
+        1. Jhonny \\
+        2. Nando \\ 
+        3. Queren}
+        }
+      }
+    }
+\end{frame}
+
+% Section 7: Looping dengan Array
+\section{Looping dengan Array}
+\begin{frame}[fragile]{For Loop dengan Array}
+  \begin{exampleblock}{Traditional For Loop}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+public class ForTraditional {
+    public static void main(String[] args) {
+        int[] nilai = {85, 90, 78, 92, 88};
+        
+        System.out.println("Daftar Nilai:");
+        for(int i = 0; i < nilai.length; i++) {
+            System.out.println("Nilai " + (i+1) + ": " + nilai[i]);
+        }
+        
+        // Menghitung rata-rata
+        int total = 0;
+        for(int i = 0; i < nilai.length; i++) {
+            total += nilai[i];
+        }
+        double rataRata = (double) total / nilai.length;
+        System.out.println("Rata-rata: " + rataRata);
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Enhanced For Loop (For-Each)}
+  \begin{exampleblock}{For-Each Loop untuk Array}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class ForEachArray {
+    public static void main(String[] args) {
+        int[] bilangan = {1, 2, 3, 4, 5};
+        String[] hari = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat"};
+        
+        // Enhanced for loop (for-each)
+        System.out.print("Bilangan: ");
+        for(int angka : bilangan) {
+            System.out.print(angka + " ");
+        }
+        
+        System.out.print("\nHari: ");
+        for(String h : hari) {
+            System.out.print(h + " ");
+        }
+        
+        // Menghitung jumlah elemen > 3
+        int count = 0;
+        for(int num : bilangan) {
+            if(num > 3) count++;
+        }
+        System.out.println("\nBilangan > 3: " + count + " buah");
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+
+% Section 8: Studi Kasus
+\section{Studi Kasus}
+\begin{frame}[fragile]{Studi Kasus 1: Statistik Nilai}
+\vspace{-0.3cm}
+  \begin{exampleblock}{Analisis Data Nilai dengan Array}
+  \vspace{-0.15cm}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class StatistikNilai {
+    public static void main(String[] args) {
+        int[] nilai = {85, 90, 78, 92, 88, 76, 95, 82, 79, 91};
+        
+        // Menghitung total
+        int total = 0;
+        for(int n : nilai) {
+            total += n;
+        }
+        double rataRata = (double) total / nilai.length;
+        
+        // Mencari nilai tertinggi dan terendah
+        int max = nilai[0];
+        int min = nilai[0];
+        for(int i = 1; i < nilai.length; i++) {
+            if(nilai[i] > max) max = nilai[i];
+            if(nilai[i] < min) min = nilai[i];
+        }
+        
+        System.out.println("Statistik Nilai:");
+        System.out.println("Rata-rata: " + rataRata);
+        System.out.println("Nilai tertinggi: " + max);
+        System.out.println("Nilai terendah: " + min);
+        System.out.println("Jumlah siswa: " + nilai.length);
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Studi Kasus 2: Pencarian dalam Array}
+  \begin{exampleblock}{Mencari Elemen dalam Array}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class PencarianArray {
+    public static void main(String[] args) {
+        int[] array = {10, 20, 25, 30, 45, 50};
+        int target = 30;
+        boolean ditemukan = false;
+        int index = -1;
+        
+        // Linear search
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] == target) {
+                ditemukan = true;
+                index = i;
+                break;
+            }
+        }
+        
+        if(ditemukan) {
+            System.out.println("Nilai " + target + " ditemukan pada index: " + index);
+        } else {
+            System.out.println("Nilai " + target + " tidak ditemukan dalam array");
+        }
+        
+        // Menampilkan semua elemen array
+        System.out.print("Array: ");
+        for(int elemen : array) {
+            System.out.print(elemen + " ");
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 9: Tambahan Materi dari Modul
+\section{Tambahan Materi dari Modul}
+
+\begin{frame}[fragile]{Copy Array dengan System.arraycopy()}
+  \scriptsize
+  \begin{block}{Konsep System.arraycopy()}
+    \begin{itemize}
+      \item Method built-in Java untuk menyalin array
+      \item Syntax: \texttt{System.arraycopy(src, srcPos, dest, destPos, length)}
+      \item Lebih cepat daripada loop manual
+    \end{itemize}
+  \end{block}
+  \vspace{-0.2cm}
+  \begin{exampleblock}{Contoh Penggunaan}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class CopyArray {
+    public static void main(String[] args) {
+        int[] asal = {7, 4, 1, 3, 6, 4, 2};
+        int[] tujuan = new int[3];
+        
+        // Salin 3 elemen dari index 0
+        System.arraycopy(asal, 0, tujuan, 0, 3);
+        
+        System.out.print("Asal: ");
+        for(int i : asal) System.out.println(i + " ");
+        
+        System.out.print("\nTujuan: ");
+        for(int i : tujuan) System.out.println(i + " ");
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+  \vspace{-0.2cm}
+  \textbf{Output:}
+    \colorbox{gray!10}{\texttt{Asal: 7 4 1 3 6 4 2    Tujuan: 7 4 1}}
+\end{frame}
+
+\begin{frame}[fragile]{Command Line Arguments (args[])}
+  \tiny
+  \begin{block}{Konsep args[]}
+    \begin{itemize}
+      \item Parameter \texttt{String[] args} pada main method
+      \item Menerima input dari command line saat menjalankan program
+      \item Setiap kata dipisah spasi menjadi elemen array
+    \end{itemize}
+  \end{block}
+  
+\vspace{-0.2cm}
+  \begin{exampleblock}{Contoh Penggunaan}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class CommandLineArgs {
+    public static void main(String[] args) {
+        // Run: java CommandLineArgs Senin November 2024
+        if(args.length >= 3) {
+            System.out.println("Hari: " + args[0]);
+            System.out.println("Bulan: " + args[1]);
+            System.out.println("Tahun: " + args[2]);
+        } else {
+            System.out.println("Input: <hari> <bulan> <tahun>");
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+\vspace{-0.3cm}
+  \begin{exampleblock}{Contoh Eksekusi di Terminal}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+# Compile program
+javac CommandLineArgs.java
+
+# Run dengan arguments
+java CommandLineArgs Senin November 2024
+\end{lstlisting}
+  \end{exampleblock}
+
+  \textbf{Output di Terminal:}
+    \colorbox{gray!10}{\texttt{Hari: Senin \newline Bulan: November \newline Tahun: 2024}}
+
+  \begin{alertblock}{Catatan}
+    Fitur ini berguna untuk program yang butuh input awal, tapi dalam praktikum sehari-hari jarang digunakan.
+  \end{alertblock}
+\end{frame}
+
+% Section 10: Best Practices
+\section{Best Practices}
+\begin{frame}[fragile]{Best Practices Penggunaan Array}
+  \begin{alertblock}{Tips dan Rekomendasi}
+    \begin{itemize}
+      \item \textbf{Inisialisasi dengan nilai default} - Gunakan loop untuk mengisi array dengan nilai awal
+      \item \textbf{Validasi index} - Selalu pastikan index dalam range [0, length-1]
+      \item \textbf{Gunakan enhanced for} - Untuk iterasi tanpa perlu mengubah elemen
+      \item \textbf{Array.length} - Selalu gunakan property length untuk batas looping
+      \item \textbf{Hindari angka langsung} - Jangan tulis angka ukuran array langsung, gunakan variabel
+      \item \textbf{Documentasi} - Berikan komentar untuk array yang kompleks
+    \end{itemize}
+  \end{alertblock}
+
+  \begin{exampleblock}{Contoh Baik}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+// BAIK: menggunakan variabel untuk ukuran array
+int jumlahSiswa = 10;
+int[] nilai = new int[jumlahSiswa];
+
+// KURANG BAIK: angka langsung
+int[] nilai = new int[10];
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 11: Kesimpulan
+\section{Kesimpulan}
+\begin{frame}{Kesimpulan}
+  \begin{alertblock}{Inti Bab 10: Array}
+    \begin{itemize}
+      \item \textbf{Array} adalah struktur data untuk menyimpan kumpulan elemen bertipe sama
+      \item \textbf{Deklarasi array} dapat dilakukan dengan 3 cara berbeda
+      \item \textbf{Elemen array} diakses melalui index (dimulai dari 0)
+      \item \textbf{Property .length} memberikan ukuran array
+      \item \textbf{Looping dengan array} menggunakan for traditional atau enhanced for
+      \item \textbf{System.arraycopy()} untuk menyalin elemen antar array
+      \item \textbf{String[] args} untuk command line arguments
+      \item Array membuat pengelolaan data dalam jumlah banyak menjadi lebih efisien
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+% Section 12: Latihan
+\section{Latihan}
+\begin{frame}[fragile]{Latihan 1: Manipulasi Array Dasar}
+  \begin{block}{Soal 1: Operasi Array Sederhana}
+    Buat program yang:
+    \begin{enumerate}
+      \item Mendeklarasi array integer dengan 5 elemen
+      \item Mengisi array dengan nilai 2, 4, 6, 8, 10
+      \item Menampilkan semua elemen array
+      \item Menghitung dan menampilkan jumlah semua elemen
+      \item Menampilkan elemen awal dan akhir
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 2: Pencarian dan Modifikasi}
+  \begin{block}{Soal 2: Array Processing}
+    Buat program yang:
+    \begin{enumerate}
+      \item Memiliki array string: {"apel", "jeruk", "mangga", "anggur", "pisang"}
+      \item Mencari index dari buah "mangga"
+      \item Mengganti "anggur" dengan "durian"
+      \item Menampilkan array sebelum dan sesudah modifikasi pada point 3.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 3: Statistik Array}
+  \begin{block}{Soal 3: Analisis Data Array}
+    Buat program yang:
+    \begin{enumerate}
+      \item Menerima sebanyak n input array integer dari user
+      \item Menghitung:
+      \begin{itemize}
+        \item Rata-rata nilai
+        \item Banyaknya elemen di atas rata-rata
+        \item Banyaknya elemen genap dan ganjil
+      \end{itemize}
+      \item Menampilkan hasil analisis dalam format yang rapi
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+
+% Section 13: Referensi
+\section{Referensi}
+\begin{frame}{Referensi}
+  \begin{block}{Referensi:}
+    \begin{itemize}
+      \item \textbf{Modul Praktikum Algoritma dan Pemrograman - Modul 10}\\
+            Departemen Matematika FSAD ITS
+      \item \textbf{Oracle Java Tutorials - Arrays}\\
+            \url{https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html}
+      \item \textbf{GeeksforGeeks - Arrays in Java}\\
+            \url{https://www.geeksforgeeks.org/arrays-in-java/}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Referensi}
+  \begin{block}{Referensi:}
+    \begin{itemize}
+      \item \textbf{W3Schools - Java Arrays}\\
+            \url{https://www.w3schools.com/java/java_arrays.asp}
+      \item \textbf{Programiz - Java Arrays}\\
+            \url{https://www.programiz.com/java-programming/arrays}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+% Penutup
+\begin{frame}[standout]
+  \Huge \textbf{Terima Kasih}
+\end{frame}
+
+\end{document}
