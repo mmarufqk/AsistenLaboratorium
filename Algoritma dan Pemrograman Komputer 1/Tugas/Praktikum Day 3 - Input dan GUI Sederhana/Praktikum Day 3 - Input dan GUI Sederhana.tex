@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{
+    language=Java,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    escapeinside={\%*}{*)}
+}
+
+\renewcommand{\thesection}{Soal \arabic{section}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{TUGAS PRAKTIKUM ALPRO 1}
+\lhead{BAB 4}
+\rfoot{Halaman \thepage}
+
+\title{TUGAS PRAKTIKUM ALGORITMA DAN PEMROGRAMAN 1}
+\author{}
+\date{Pertemuan ke-3\\BAB 4\\Input dan GUI Sederhana\\Deadline: 06 Oktober 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\setcounter{page}{0}
+
+\section*{Petunjuk}
+\begin{itemize}
+    \item Kerjakan semua soal di bawah ini dengan menggunakan bahasa Java.
+    \item Berikan penjelasan singkat untuk setiap program dalam komentar kode.
+    \item Program harus dapat di-compile dan di-run tanpa error.
+    \item Nama file source code (.java) harus sesuai dengan nama class.
+    \item Kumpulkan file source code (.java) untuk setiap program dan laporan praktikum (.pdf).
+    \item Format laporan praktikum dapat dilihat di myITS Classroom.
+    \item Penamaan file laporan praktikum adalah \texttt{LaporanPraktikum3\_Kelompok1\_Nama Lengkap}.pdf.
+    \item Hasil pengerjaan dikumpulkan di myITS Classroom dalam satu file (.zip) dengan nama \texttt{LaporanPraktikum3\_Kelompok1\_Nama Lengkap}.zip yang berisi file source code (.java) dan laporan praktikum (.pdf).
+    \item Deadline pengumpulan: \textbf{06 Oktober 2025}
+\end{itemize}
+
+
+\newpage
+
+\section{Melengkapi Program Biodata Mahasiswa}
+Lengkapi program berikut yang meminta input data mahasiswa dan menampilkannya dalam GUI.
+
+\begin{lstlisting}[]
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+public class DataMahasiswa {
+    public static void main(String[] args) {
+        // [1] Deklarasi Scanner
+        ____________ input = new ____________(System.in);
+        
+        System.out.print("Masukkan Nama: ");
+        // [2] Baca input nama (String) 
+        String nama = ____________;
+        
+        System.out.print("Masukkan NRP: ");
+        // [3] Baca input NRP (String)
+        String nrp = ____________;
+        
+        System.out.print("Masukkan IPK: ");
+        // [4] Baca input IPK (double)
+        double ipk = ____________;
+        
+        // [5] Format output
+        String hasil = "Nama: " + ____________ + 
+                      "\nNRP: " + ____________ + 
+                      "\nIPK: " + ____________;
+        
+        // [6] Tampilkan di JOptionPane
+        JOptionPane.____________(null, hasil);
+    }
+}
+\end{lstlisting}
+
+\section{Program Kalkulator GUI dengan BufferedReader dan JOptionPane}
+Buat program kalkulator sederhana yang menggunakan \textbf{BufferedReader} untuk input bilangan dan \textbf{JOptionPane} untuk input operator dan output hasil.
+
+\newpage
+\noindent \textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+// Input di konsol
+Masukkan bilangan pertama: 10
+Masukkan bilangan kedua: 5
+
+// Input operator di JOptionPane
+[Input Dialog] Masukkan operator (+, -, *, /): *
+
+// Output di JOptionPane
+[Message Dialog] 10.0 * 5.0 = 50.0
+\end{verbatim}
+\end{mdframed}
+
+\vspace{1cm}
+\end{document}

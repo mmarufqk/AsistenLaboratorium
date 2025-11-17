@@ -1,0 +1,106 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{mdframed}
+\usepackage{xcolor}
+
+\renewcommand{\thesection}{Soal \arabic{section}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{TUGAS PRAKTIKUM ALPRO 1}
+\lhead{BAB 2 \& 3}
+\rfoot{Halaman \thepage}
+
+\title{TUGAS PRAKTIKUM ALGORITMA DAN PEMROGRAMAN 1}
+\author{}
+\date{Pertemuan ke-2\\BAB 2 \& 3\\Dasar Pemrograman Java \& Variabel dan Operator\\Deadline: 29 September 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\setcounter{page}{0}
+
+\section*{Petunjuk}
+\begin{itemize}
+    \item Kerjakan semua soal di bawah ini dengan menggunakan bahasa Java.
+    \item Berikan penjelasan singkat untuk setiap program dalam komentar kode.
+    \item Program harus dapat di-compile dan di-run tanpa error.
+    \item Nama file source code (.java) harus sesuai dengan nama class.
+    \item Kumpulkan file source code (.java) untuk setiap program dan laporan praktikum (.pdf).
+    \item Format laporan praktikum dapat dilihat di myITS Classroom.
+    \item Penamaan file laporan praktikum adalah \texttt{LaporanPraktikum2\_Kelompok1\_Nama Lengkap}.pdf.
+    \item Hasil pengerjaan dikumpulkan di myITS Classroom dalam satu file (.zip) dengan nama \texttt{LaporanPraktikum2\_Kelompok1\_Nama Lengkap}.zip yang berisi file source code (.java) dan laporan praktikum (.pdf).
+    \item Deadline pengumpulan: \textbf{29 September 2025}
+\end{itemize}
+
+
+\newpage
+
+\section{Kalkulator Sederhana dengan Operator Aritmatika}
+Buat program yang meminta dua bilangan dan sebuah operator (+, -, *, /, \%) kemudian menampilkan hasil operasinya.
+
+\noindent \textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+Masukkan bilangan pertama: 10
+Masukkan operator (+, -, *, /, %): *
+Masukkan bilangan kedua: 5
+Hasil: 50
+\end{verbatim}
+\end{mdframed}
+
+\section{Konversi Suhu (Celsius ke Fahrenheit, Reamur, dan Kelvin)}
+Buat program yang menerima input suhu dalam Celsius dan mengonversinya ke Fahrenheit, Reamur, dan Kelvin.
+
+\noindent \textbf{Rumus:}
+\begin{align*}
+\text{Fahrenheit} &= \text{Celsius} \times \frac{9}{5} + 32 \\
+\text{Reamur} &= \text{Celsius} \times \frac{4}{5} \\
+\text{Kelvin} &= \text{Celsius} + 273
+\end{align*}
+
+\noindent \textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+Masukkan suhu dalam Celsius: 25
+25°C = 77°F
+25°C = 20°R
+25°C = 298K
+\end{verbatim}
+\end{mdframed}
+
+\section{Program dengan Operator Ternary}
+Buat program yang menerima dua bilangan dan menggunakan operator ternary untuk menampilkan bilangan yang lebih besar.
+
+\noindent \textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+Masukkan bilangan pertama: 8
+Masukkan bilangan kedua: 12
+Bilangan yang lebih besar adalah: 12
+\end{verbatim}
+\end{mdframed}
+
+\newpage
+\section{Penggunaan Operator Increment dan Decrement}
+Buat program yang menunjukkan perbedaan antara prefix dan postfix increment/decrement.
+
+\noindent \textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+Nilai awal a = 5
+Setelah a++: 5
+Setelah ++a: 7
+Setelah a--: 7
+Setelah --a: 5
+\end{verbatim}
+\end{mdframed}
+
+\vspace{1cm}
+\end{document}

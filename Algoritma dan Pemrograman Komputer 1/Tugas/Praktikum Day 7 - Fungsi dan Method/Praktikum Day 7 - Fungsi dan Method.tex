@@ -1,0 +1,255 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{
+    language=Java,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    escapeinside={\%*}{*)}
+}
+
+\renewcommand{\thesection}{Soal \arabic{section}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{TUGAS PRAKTIKUM ALPRO 1}
+\lhead{BAB 9}
+\rfoot{Halaman \thepage}
+
+\title{TUGAS PRAKTIKUM ALGORITMA DAN PEMROGRAMAN 1}
+\author{}
+\date{Pertemuan ke-7\\BAB 9: Fungsi/Method\\Deadline: 10 November 2024 Pukul 18:29}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\setcounter{page}{0}
+
+\section*{Petunjuk}
+\begin{itemize}
+    \item Kerjakan semua soal di bawah ini dengan menggunakan bahasa Java.
+    \item Implementasikan konsep Fungsi/Method sesuai materi Modul 9.
+    \item Program harus dapat di-compile dan di-run tanpa error.
+    \item Nama file source code (.java) harus sesuai dengan nama class.
+    \item Kumpulkan file source code (.java) untuk setiap program dan laporan praktikum (.pdf).
+    \item Source code di dalam laporan wajib dilampirkan menggunakan syntax highlighter.
+    \item Format laporan praktikum dapat dilihat di myITS Classroom.
+    \item Penamaan file laporan praktikum adalah \texttt{LaporanPraktikum7\_Kelompok1\_Nama Lengkap}.pdf.
+    \item Hasil pengerjaan dikumpulkan di myITS Classroom dalam satu file (.zip) dengan nama \texttt{LaporanPraktikum7\_Kelompok1\_Nama Lengkap}.zip yang berisi file source code (.java) dan laporan praktikum (.pdf).
+    \item Deadline pengumpulan: \textbf{10 November 2024 Pukul 18:29}
+\end{itemize}
+
+\newpage
+\section{Kalkulator Pola Bilangan Rekursif}
+
+Buat program kalkulator yang dapat menghitung berbagai pola bilangan menggunakan method rekursif. Program harus memiliki menu untuk memilih jenis pola bilangan yang ingin dihitung.
+
+\textbf{Spesifikasi Program:}
+\begin{itemize}
+    \item Tampilkan menu pilihan pola bilangan:
+    \begin{enumerate}
+        \item Fibonacci
+        \item Faktorial
+        \item Segitiga Pascal
+        \item Keluar
+    \end{enumerate}
+    \item Gunakan method rekursif untuk setiap perhitungan
+    \item Program berjalan sampai user memilih keluar
+\end{itemize}
+
+\textbf{Rumus Pola Bilangan:}
+\begin{itemize}
+    \item \textbf{Fibonacci:} $F(n) = F(n-1) + F(n-2)$ dengan $F(1)=1, F(2)=1$
+    \item \textbf{Faktorial:} $n! = n \times (n-1)!$ dengan $0! = 1$
+    \item \textbf{Segitiga Pascal:} $C(n,k) = C(n-1,k-1) + C(n-1,k)$ dengan $C(n,0)=1, C(n,n)=1$
+\end{itemize}
+
+\textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+=== KALKULATOR POLA BILANGAN ===
+1. Fibonacci
+2. Faktorial  
+3. Segitiga Pascal
+4. Keluar
+
+Pilihan Anda: 1
+Masukkan nilai n: 7
+F(7) = 13
+
+Pilihan Anda: 2
+Masukkan nilai n: 5
+5! = 120
+
+Pilihan Anda: 3
+Masukkan nilai n: 4
+Baris ke-4: 1 3 3 1
+
+Pilihan Anda: 4
+Terima kasih!
+\end{verbatim}
+\end{mdframed}
+
+\textbf{Requirements:}
+\begin{itemize}
+    \item Buat method rekursif untuk setiap pola bilangan dengan base case yang tepat
+    \item Gunakan method overloading jika diperlukan untuk handling input yang berbeda
+    \item Program harus dapat menangani input yang tidak valid (misal: bilangan negatif) dan menampilkan pesan error yang jelas
+
+\end{itemize}
+
+\newpage
+
+\section{Petualangan Java Mencari Harta Karun}
+
+\textbf{Java adalah seorang petualang pemberani} yang gemar \textbf{menjelajah dunia pemrograman}. Suatu hari, ia mendengar kisah tentang \textbf{sebuah harta karun legendaris} yang tersembunyi jauh di Pulau A-1. Tanpa ragu, Java memulai perjalanan panjang untuk menemukannya.
+
+Namun, perjalanan Java tidak mudah. Ia harus \textbf{mengatur energi}, \textbf{melangkah sejauh 50 satuan}, dan terkadang mencari \textbf{petunjuk rahasia} agar tidak tersesat. Tugas kamu adalah \textbf{membantu Java menyelesaikan misinya} dengan melengkapi method yang belum diimplementasikan.
+
+Lengkapilah program berikut dengan mengisi bagian yang ditandai. Ikuti setiap instruksi pada komentar agar petualangan Java berjalan dengan sukses!
+
+\begin{lstlisting}
+import java.util.Scanner;
+
+public class PetualanganJava {
+    private static int energi = 100;
+    private static int jarak = 0;
+    
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("=== PETUALANGAN JAVA ===");
+        System.out.println("Energi awal: " + energi);
+
+        // LENGKAPI 1: Panggil method tampilkanPeta()
+
+        while (energi > 0 && jarak < 50) {
+            System.out.println("\nEnergi: " + energi + " | Jarak: " + jarak + "/50");
+            System.out.print("Aksi (1=Jalan, 2=Istirahat, 3=Petunjuk): ");
+            int aksi = input.nextInt();
+
+            // LENGKAPI 2: Gunakan switch-case untuk aksi
+            // case 1 -> jalan() lalu tambahkan langkah ke jarak
+            // case 2 -> istirahat()
+            // case 3 -> tampilkan petunjuk dari cariPetunjuk()
+            // default -> aksi tidak valid
+
+            System.out.println("Energi sekarang: " + energi);
+
+            if (energi <= 20 && energi > 0) {
+                System.out.println("Energi menipis! Disarankan istirahat.");
+            }
+
+            if (energi <= 0) {
+                System.out.println("\nGame Over! Energi habis.");
+                break;
+            }
+
+            if (cekHarta()) {
+                System.out.println("\nSELAMAT! Harta ditemukan!");
+                break;
+            }
+        }
+
+        input.close();
+    }
+
+    public static void tampilkanPeta() {
+        // LENGKAPI 3: Cetak peta perjalanan Java
+    }
+
+    public static int jalan() {
+        // LENGKAPI 4: Generate langkah 1-10
+        // LENGKAPI 5: Energi berkurang 5-15, energi tidak boleh negatif
+        // LENGKAPI 6: Tampilkan berapa langkah dan energi berkurang
+        return 0; // ubah dengan langkah sebenarnya
+    }
+
+    public static void istirahat() {
+        // LENGKAPI 7: Tambah energi 20-40, maksimal 100
+        // LENGKAPI 8: Cetak pesan energi bertambah
+    }
+
+    public static String cariPetunjuk() {
+        // LENGKAPI 9: Energi berkurang 10
+        // LENGKAPI 10: Return petunjuk acak dari array string
+        return ""; // ubah dengan petunjuk sebenarnya
+    }
+    
+    public static boolean cekHarta() {
+        // LENGKAPI 11: return true jika jarak >= 50
+        return false;
+    }
+}
+\end{lstlisting}
+
+\newpage
+
+\textbf{Contoh Output:}
+\begin{mdframed}[backgroundcolor=gray!15]
+\begin{verbatim}
+=== PETUALANGAN JAVA ===
+Energi awal: 100
+
+PETA:
+Start [ ]-[ ]-[ ]-[ ]-[ ]-[HARTA]
+      0   10  20  30  40   50
+
+Energi: 100 | Jarak: 0/50
+Aksi (1=Jalan, 2=Istirahat, 3=Petunjuk): 1
+Anda berjalan 7 langkah! (-8 energi)
+Energi sekarang: 92
+
+Energi: 92 | Jarak: 7/50
+Aksi (1=Jalan, 2=Istirahat, 3=Petunjuk): 3
+Petunjuk: Terus maju hingga jarak 50!
+Energi sekarang: 82
+
+SELAMAT! Harta ditemukan!
+\end{verbatim}
+\end{mdframed}
+
+\textbf{Petunjuk:}
+\begin{itemize}
+\item Gunakan \texttt{Math.random()} untuk angka acak
+\item Energi tidak boleh negatif
+\item Jika energi habis, permainan langsung berakhir
+\item Untuk method \texttt{cariPetunjuk()} gunakan array string yang berisi beberapa petunjuk. Konsep array akan kita bahas pada modul 10, tapi untuk sementara ini sebagai pengenalan:
+
+\begin{lstlisting}
+String[] petunjuk = {
+    "Terus maju hingga jarak 50!",
+    "Jangan lupa istirahat saat energi menipis!",
+    "Harta karun berada di jarak 50 satuan!",
+    "Setiap langkah membutuhkan energi!",
+    "Gunakan aksi 'Istirahat' untuk mengisi energi!"
+};
+int index = (int)(Math.random() * petunjuk.length);
+\end{lstlisting}
+\end{itemize}
+
+\end{document}
