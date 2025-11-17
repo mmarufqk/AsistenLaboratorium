@@ -356,6 +356,58 @@ class InisialisasiPerElemen {
     }
 \end{frame}
 
+\begin{frame}[fragile]{Inisialisasi Array dengan Input Scanner}
+\begin{lstlisting}[basicstyle=\ttfamily\Tiny]
+import java.util.Scanner;
+
+class InisialisasiDenganInput {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Meminta ukuran array dari user
+        System.out.print("Masukkan jumlah mahasiswa: ");
+        int jumlah = scanner.nextInt();
+        scanner.nextLine(); // membersihkan newline
+        
+        // Deklarasi array dengan ukuran dari input
+        String[] mahasiswa = new String[jumlah];
+        
+        // Mengisi array dengan input user
+        for(int i = 0; i < mahasiswa.length; i++) {
+            System.out.print("Masukkan nama mahasiswa ke-" + (i+1) + ": ");
+            mahasiswa[i] = scanner.nextLine();
+        }
+        
+        // Menampilkan hasil
+        System.out.println("\nDaftar Mahasiswa:");
+        for(int i = 0; i < mahasiswa.length; i++) {
+            System.out.println((i+1) + ". " + mahasiswa[i]);
+        }
+        
+        scanner.close();
+    }
+}
+\end{lstlisting}
+
+\vspace{-0.3cm}
+  \textbf{Output Program}
+    \colorbox{gray!20}{
+      \parbox{0.9\textwidth}{
+        {\Tiny
+        \texttt{Masukkan jumlah mahasiswa: 3 \\[-2.5ex]
+        Masukkan nama mahasiswa ke-1: Jhonny \\[-2.5ex]
+        Masukkan nama mahasiswa ke-2: Nando \\[-2.5ex]
+        Masukkan nama mahasiswa ke-3: Queren \\[-2.5ex]
+        \\[-2.5ex]
+        Daftar Mahasiswa: \\[-2.5ex]
+        1. Jhonny \\[-2.5ex]
+        2. Nando \\[-2.5ex] 
+        3. Queren} 
+        }
+      }
+    }
+\end{frame}
+
 % Section 7: Looping dengan Array
 \section{Looping dengan Array}
 \begin{frame}[fragile]{For Loop dengan Array}
@@ -488,7 +540,254 @@ public class PencarianArray {
   \end{exampleblock}
 \end{frame}
 
-% Section 9: Tambahan Materi dari Modul
+% Section 9: Array Multidimensi
+\section{Array Multidimensi}
+\begin{frame}[fragile]{Konsep Array Multidimensi}
+  \scriptsize
+  \begin{block}{Apa itu Array Multidimensi?}
+    Array multidimensi adalah array yang memiliki lebih dari satu dimensi (indeks).
+    \begin{itemize}
+      \item \textbf{Array 2D}: seperti tabel dengan baris dan kolom
+      \item \textbf{Array 3D+}: seperti kubus atau struktur lebih kompleks
+      \item Berguna untuk data terstruktur: matriks, tabel, grid, dll.
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Deklarasi Array Multidimensi}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+// Array 2D (2 baris, 3 kolom)
+int[][] matrix = new int[2][3];
+
+// Array 3D (3 dimensi)
+int[][][] cube = new int[3][3][3];
+
+// Inisialisasi langsung
+String[][] data = {
+  {"Nama", "NRP", "Nilai"},
+  {"Budi", "5021", "85"},
+  {"Sari", "5022", "92"}
+};
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Array 2 Dimensi (Matriks)}
+  \tiny
+  \vspace{-0.05cm}
+  \textbf{Konsep Array 2D}
+  \vspace{-0.25cm}
+    \begin{itemize}
+      \item Seperti tabel dengan \textbf{baris} dan \textbf{kolom}
+      \item Indexing: \texttt{matrix[baris][kolom]}
+      \item Berguna untuk data terstruktur: nilai siswa, pixel gambar, dll.
+    \end{itemize}
+
+\vspace{-0.2cm}
+  \begin{exampleblock}{Contoh Lengkap Array 2D}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class Matriks2D {
+    public static void main(String[] args) {
+        // Deklarasi dan inisialisasi matriks 3x3
+        int[][] matriks = {
+            {1, 2, 3},
+            {4, 5, 6}, 
+            {7, 8, 9}
+        };
+        
+        // Akses elemen spesifik
+        System.out.println("Elemen [1][2]: " + matriks[1][2]); // Output: 6
+        
+        // Menampilkan seluruh matriks dengan nested loop
+        System.out.println("Isi matriks:");
+        for(int i = 0; i < matriks.length; i++) {
+            for(int j = 0; j < matriks[i].length; j++) {
+                System.out.print(matriks[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Array Lebih dari 2 Dimensi}
+  \tiny
+  \vspace{-0.05cm}
+  \textbf{Array 3 Dimensi dan Lebih}
+    \begin{itemize}
+      \vspace{-0.25cm}
+      \item Array 3D: seperti kubus (panjang × lebar × tinggi)
+      \item Array 4D+: untuk data yang lebih kompleks
+      \item Penggunaan lebih jarang, tetapi powerful untuk data kompleks
+    \end{itemize}
+  
+  \vspace{-0.2cm}
+  \begin{exampleblock}{Contoh Array 3D}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+public class Array3D {
+    public static void main(String[] args) {
+        // Array 3D: 2×3×2
+        int[][][] data3D = {
+            { {1, 2}, {3, 4}, {5, 6} },
+            { {7, 8}, {9, 10}, {11, 12} }
+        };
+        
+        // Akses elemen
+        System.out.println("data3D[1][2][0]: " + data3D[1][2][0]); // Output: 11
+        
+        // Looping array 3D
+        for(int i = 0; i < data3D.length; i++) {
+            for(int j = 0; j < data3D[i].length; j++) {
+                for(int k = 0; k < data3D[i][j].length; k++) {
+                    System.out.print(data3D[i][j][k] + " ");
+                }
+                System.out.print(" | ");
+            }
+            System.out.println();
+        }
+    }
+}
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+% Section 10: Resizeable Array (ArrayList)
+\section{Resizeable Array (ArrayList)}
+\begin{frame}[fragile]{Konsep ArrayList}
+  \scriptsize
+  \begin{block}{Apa itu ArrayList?}
+    \begin{itemize}
+      \item Bagian dari Java Collections Framework
+      \item Array yang ukurannya dapat berubah secara dinamis
+      \item Tidak perlu menentukan ukuran di awal
+      \item Menyediakan banyak method utilitas
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Array Biasa (Fixed Size)}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+// Deklarasi dengan ukuran fixed
+int[] arrayBiasa = new int[5];
+String[] names = new String[3];
+
+// Harus tentukan ukuran di awal
+arrayBiasa[0] = 10;
+names[0] = "Budi";
+
+// Tidak bisa menambah elemen melebihi ukuran
+// names[3] = "Sari"; // ERROR: Index out of bounds
+
+// Akses langsung dengan index
+System.out.println(names[0]); // Budi
+
+// Panjang array fixed
+System.out.println(names.length); // 3
+\end{lstlisting}
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{Konsep ArrayList}
+  \begin{exampleblock}{ArrayList (Dynamic Size)}
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+import java.util.ArrayList;
+
+// Deklarasi tanpa ukuran awal
+ArrayList<Integer> listAngka = new ArrayList<>();
+ArrayList<String> listNama = new ArrayList<>();
+
+// Bisa tambah elemen sebanyak apapun
+listAngka.add(10);
+listNama.add("Budi");
+listNama.add("Sari"); // Tidak ada batas
+
+// Untuk tipe primitif, gunakan Wrapper Class
+// ArrayList<int> listSalah; // ERROR
+// ArrayList<Integer> listBenar; // BENAR
+
+// Akses dengan method get()
+System.out.println(listNama.get(0)); // Budi
+
+// Ukuran dinamis
+System.out.println(listNama.size()); // 2
+\end{lstlisting}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]{Method-Method Penting ArrayList}
+  \tiny
+\begin{lstlisting}[basicstyle=\ttfamily\tiny]
+import java.util.ArrayList;
+
+public class ContohArrayList {
+    public static void main(String[] args) {
+        // Deklarasi ArrayList
+        ArrayList<String> daftarNama = new ArrayList<>();
+        
+        // Method add() - menambah elemen
+        daftarNama.add("Budi");
+        daftarNama.add("Sari");
+        daftarNama.add("Andi");
+        
+        // Method get() - mengakses elemen
+        System.out.println("Elemen ke-1: " + daftarNama.get(1)); // Sari
+        
+        // Method size() - mendapatkan ukuran
+        System.out.println("Jumlah elemen: " + daftarNama.size()); // 3
+        
+        // Method remove() - menghapus elemen
+        daftarNama.remove(0); // Hapus "Budi"
+        
+        // Menampilkan semua elemen
+        System.out.println("Daftar: " + daftarNama); // [Sari, Andi]
+        
+        // Method contains() - mengecek keberadaan
+        System.out.println("Ada Sari? " + daftarNama.contains("Sari")); // true
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Konversi antara Array dan ArrayList}
+  \scriptsize
+\begin{lstlisting}[basicstyle=\ttfamily\Tiny]
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class KonversiArray {
+    public static void main(String[] args) {
+        // Array biasa
+        String[] arrayBuah = {"Apel", "Jeruk", "Mangga"};
+        
+        // Konversi Array → ArrayList
+        ArrayList<String> listBuah = new ArrayList<>(Arrays.asList(arrayBuah));
+        listBuah.add("Durian"); // Bisa ditambah
+        
+        System.out.println("ArrayList: " + listBuah);
+        
+        // Konversi ArrayList → Array
+        String[] arrayBaru = new String[listBuah.size()];
+        arrayBaru = listBuah.toArray(arrayBaru);
+        
+        System.out.print("Array baru: ");
+        for(String buah : arrayBaru) {
+            System.out.print(buah + " ");
+        }
+        
+        // Konversi langsung dengan loop (alternatif)
+        ArrayList<Integer> listAngka = new ArrayList<>();
+        int[] arrayAngka = {1, 2, 3, 4, 5};
+        for(int angka : arrayAngka) {
+            listAngka.add(angka); // Auto-boxing: int → Integer
+        }
+        System.out.println("\nList angka: " + listAngka);
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+% Section 11: Tambahan Materi dari Modul
 \section{Tambahan Materi dari Modul}
 
 \begin{frame}[fragile]{Copy Array dengan System.arraycopy()}
@@ -512,10 +811,10 @@ public class CopyArray {
         System.arraycopy(asal, 0, tujuan, 0, 3);
         
         System.out.print("Asal: ");
-        for(int i : asal) System.out.println(i + " ");
+        for(int i : asal) System.out.print(i + " ");
         
         System.out.print("\nTujuan: ");
-        for(int i : tujuan) System.out.println(i + " ");
+        for(int i : tujuan) System.out.print(i + " ");
     }
 }
 \end{lstlisting}
@@ -573,7 +872,7 @@ java CommandLineArgs Senin November 2024
   \end{alertblock}
 \end{frame}
 
-% Section 10: Best Practices
+% Section 12: Best Practices
 \section{Best Practices}
 \begin{frame}[fragile]{Best Practices Penggunaan Array}
   \begin{alertblock}{Tips dan Rekomendasi}
@@ -583,6 +882,8 @@ java CommandLineArgs Senin November 2024
       \item \textbf{Gunakan enhanced for} - Untuk iterasi tanpa perlu mengubah elemen
       \item \textbf{Array.length} - Selalu gunakan property length untuk batas looping
       \item \textbf{Hindari angka langsung} - Jangan tulis angka ukuran array langsung, gunakan variabel
+      \item Gunakan \textbf{Array Multidimensi} untuk kebutuhan yang lebih kompleks
+      \item Gunakan \textbf{Resizeable Array} ketika membutuhkan array yang resizeable
       \item \textbf{Documentasi} - Berikan komentar untuk array yang kompleks
     \end{itemize}
   \end{alertblock}
@@ -599,7 +900,7 @@ int[] nilai = new int[10];
   \end{exampleblock}
 \end{frame}
 
-% Section 11: Kesimpulan
+% Section 13: Kesimpulan
 \section{Kesimpulan}
 \begin{frame}{Kesimpulan}
   \begin{alertblock}{Inti Bab 10: Array}
@@ -655,6 +956,38 @@ int[] nilai = new int[10];
         \item Banyaknya elemen genap dan ganjil
       \end{itemize}
       \item Menampilkan hasil analisis dalam format yang rapi
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 4: Array Multidimensi (Matriks)}
+  \begin{block}{Soal 4: Operasi Matriks 2D}
+    Buat program yang:
+    \begin{enumerate}
+      \item Mendeklarasi matriks 2x3 (2 baris, 3 kolom)
+      \item Mengisi matriks dengan nilai: Baris1: {1, 2, 3}, Baris2: {4, 5, 6}
+      \item Menampilkan matriks dalam format tabel rapi
+      \item Menjumlahkan semua elemen matriks dan menampilkan hasilnya
+      \item Menampilkan elemen pada posisi [1][2] (baris 1, kolom 2)
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Latihan 5: ArrayList (Daftar Belanja)}
+  \begin{block}{Soal 5: Manajemen Daftar Belanja}
+    Buat program yang:
+    \begin{enumerate}
+      \item Menggunakan ArrayList untuk menyimpan daftar belanja
+      \item Memiliki menu:
+      \begin{itemize}
+        \item Tambah item belanja
+        \item Hapus item belanja (berdasarkan nama)
+        \item Tampilkan semua item
+        \item Cek apakah item ada dalam daftar
+        \item Keluar
+      \end{itemize}
+      \item Program terus berjalan sampai user memilih keluar
+      \item Gunakan Scanner untuk input user
     \end{enumerate}
   \end{block}
 \end{frame}
